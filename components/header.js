@@ -1,6 +1,25 @@
 import Link from 'next/link';
 
-const Header = () => (
+const routes = [
+  {
+    path: '/',
+    title: 'Home',
+  },
+  {
+    path: '/about',
+    title: 'About us',
+  },
+  {
+    path: '/products',
+    title: 'Products',
+  },
+  {
+    path: '/contact',
+    title: 'Contact us',
+  },
+];
+
+const Header = ({ pageTitle }) => (
   <header id="mu-hero">
     <div className="container">
       <nav className="navbar navbar-expand-lg navbar-light mu-navbar">
@@ -24,26 +43,16 @@ const Header = () => (
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto mu-navbar-nav">
-            <li className="nav-item active">
-              <Link href="/">
-                <a>Home</a>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link href="/about">
-                <a>About us</a>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link href="/products">
-                <a>Products</a>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link href="/contact">
-                <a>Contact us</a>
-              </Link>
-            </li>
+            {routes.map((route, index) => (
+              <li
+                className={`nav-item ${route.title === pageTitle && 'active'}`}
+                key={index}
+              >
+                <Link href={route.path}>
+                  <a>{route.title}</a>
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
       </nav>

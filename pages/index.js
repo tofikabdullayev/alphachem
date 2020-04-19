@@ -5,7 +5,7 @@ import Products from '../components/products';
 
 const Index = () => (
   <div>
-    <Header />
+    <Header pageTitle="Home" />
     <Slider />
     <main>
       <About />

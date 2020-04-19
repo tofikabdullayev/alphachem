@@ -4,7 +4,7 @@ import PageHeader from '../components/pageHeader';
 
 const ProductsPage = () => (
   <div>
-    <Header />
+    <Header pageTitle="Products" />
     <PageHeader title="Chemical products" />
     <main>
       <Products />

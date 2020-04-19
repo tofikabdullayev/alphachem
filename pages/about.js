@@ -4,7 +4,7 @@ import PageHeader from '../components/pageHeader';
 
 const AboutPage = () => (
   <div>
-    <Header />
+    <Header pageTitle="About us" />
     <PageHeader title="About us" />
     <main>
       <About />

@@ -3,7 +3,7 @@ import PageHeader from '../components/pageHeader';
 
 const ContactPage = () => (
   <div>
-    <Header />
+    <Header pageTitle="Contact us" />
     <PageHeader title="Contact us" />
     <main>
       <section id="mu-contact">
