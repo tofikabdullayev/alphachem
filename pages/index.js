@@ -2,6 +2,7 @@ import Header from '../components/header';
 import Slider from '../components/slider';
 import About from '../components/about';
 import Products from '../components/products';
+import { productsData } from '../data/products';
 
 const Index = () => (
   <div>
@@ -9,7 +10,7 @@ const Index = () => (
     <Slider />
     <main>
       <About />
-      <Products />
+      <Products productsData={productsData} />
     </main>
   </div>
 );

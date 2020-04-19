@@ -30,7 +30,10 @@ class Products extends React.Component {
                     <div className="filtr-container">
                       {products &&
                         products.map((product) => (
-                          <div className="col-xs-6 col-sm-6 col-md-4 filtr-item">
+                          <div
+                            className="col-xs-6 col-sm-6 col-md-4 filtr-item"
+                            key={product.title}
+                          >
                             <a
                               className="mu-imglink"
                               href={product.imageSrc}
