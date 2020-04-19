@@ -1,8 +1,12 @@
 import Header from '../components/header';
 import PageHeader from '../components/pageHeader';
+import Head from 'next/head';
 
 const ContactPage = () => (
   <div>
+    <Head>
+      <title>Alphachem - Contacts</title>
+    </Head>
     <Header pageTitle="Contact us" />
     <PageHeader title="Contact us" />
     <main>
