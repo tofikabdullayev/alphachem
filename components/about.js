@@ -7,7 +7,7 @@ const About = () => (
             <div className="row">
               <div className="col-md-12">
                 <div className="mu-title">
-                  <h2>Who we are</h2>
+                  <h2>About text</h2>
                   <p>
                     Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
                     Aenean commodo ligula eget dolor. Aenean massa cum sociis.

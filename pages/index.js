@@ -5,8 +5,9 @@ import Products from '../components/products';
 import { productsData } from '../data/products';
 import { sliderData } from '../data/slider';
 import Head from 'next/head';
+import { withTranslation } from '../i18n';
 
-const Index = () => (
+const Index = ({ t }) => (
   <div>
     <Head>
       <title>Alphachem - Home</title>
@@ -14,10 +15,15 @@ const Index = () => (
     <Header pageTitle="Home" />
     <Slider sliderData={sliderData} />
     <main>
+      <div>{t('test')}</div>
       <About />
       <Products productsData={productsData} />
     </main>
   </div>
 );
 
-export default Index;
+Index.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
+export default withTranslation('common')(Index);

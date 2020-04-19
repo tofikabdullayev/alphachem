@@ -4,13 +4,17 @@
   "description": "alphachem web site",
   "main": "index.js",
   "scripts": {
-    "dev": "next"
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
+    "express": "^4.17.1",
     "next": "^9.3.5",
+    "next-i18next": "^4.3.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   }
