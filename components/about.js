@@ -19,11 +19,7 @@ const About = () => (
             <div className="row">
               <div className="col-md-6">
                 <div className="mu-about-left">
-                  <img
-                    className=""
-                    src="/assets/images/about-us.jpg"
-                    alt="img"
-                  />
+                  <img className="" src="/slider/about.jpg" alt="img" />
                 </div>
               </div>
               <div className="col-md-6">
