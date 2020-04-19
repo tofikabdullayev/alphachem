@@ -5,7 +5,7 @@ import Products from '../components/products';
 import { productsData } from '../data/products';
 import { sliderData } from '../data/slider';
 import Head from 'next/head';
-import { withTranslation } from '../i18n';
+import { withTranslation, i18n } from '../i18n';
 
 const Index = ({ t }) => (
   <div>
@@ -15,6 +15,11 @@ const Index = ({ t }) => (
     <Header pageTitle="Home" />
     <Slider sliderData={sliderData} />
     <main>
+      <div>
+        <a onClick={() => i18n.changeLanguage('az')}>AZ</a>
+        <a onClick={() => i18n.changeLanguage('en')}>EN</a>
+        <a onClick={() => i18n.changeLanguage('ru')}>RU</a>
+      </div>
       <div>{t('test')}</div>
       <About />
       <Products productsData={productsData} />
