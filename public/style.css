@@ -2836,6 +2836,9 @@ a:focus,
 /*--------------------*/
 
 @media (max-width: 1199px) {
+	.navbar-brand.mu-logo {
+		max-width: 240px;
+	}
 
 	.mu-single-slide-content-area {
 		padding: 9% 10%;
@@ -2961,6 +2964,7 @@ a:focus,
 		border-color: #fff;
 		cursor: pointer;
 		padding: 10px 15px;
+		background: #0091ea;
 	}
 
 	.mu-single-slide-content-area {
