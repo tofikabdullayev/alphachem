@@ -1,4 +1,4 @@
-const About = () => (
+const About = ({ t }) => (
   <section id="mu-about">
     <div className="container">
       <div className="row">
@@ -7,11 +7,8 @@ const About = () => (
             <div className="row">
               <div className="col-md-12">
                 <div className="mu-title">
-                  <h2>About text</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                    Aenean commodo ligula eget dolor. Aenean massa cum sociis.
-                  </p>
+                  <h2>{t('about_title')}</h2>
+                  <p>{t('about_description')}</p>
                 </div>
               </div>
             </div>

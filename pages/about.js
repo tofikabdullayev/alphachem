@@ -6,14 +6,18 @@ import { withTranslation } from '../i18n';
 const AboutPage = ({ t }) => (
   <div>
     <Head>
-      <title>Alphachem - About</title>
+      <title>Alphachem - {t('nav./about')}</title>
     </Head>
     <Header pageTitle="About us" t={t} />
-    <PageHeader title="About us" />
+    <PageHeader title="/about" t={t} />
     <main>
-      <About />
+      <About t={t} />
     </main>
   </div>
 );
+
+AboutPage.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
 
 export default withTranslation('common')(AboutPage);

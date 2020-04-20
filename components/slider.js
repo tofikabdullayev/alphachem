@@ -10,19 +10,20 @@ class Slider extends React.Component {
     });
   }
   render() {
+    const { t } = this.props;
     return (
       <div id="mu-slider">
         <div className="mu-slide">
           {this.props.sliderData.map((slideritem) => (
-            <div className="mu-single-slide" key={slideritem.title}>
+            <div className="mu-single-slide" key={slideritem.id}>
               <img src={slideritem.imageSrc} alt="slider img" />
               <div className="mu-single-slide-content-area">
                 <div className="container">
                   <div className="row">
                     <div className="col-md-12">
                       <div className="mu-single-slide-content">
-                        <h1>{slideritem.title}</h1>
-                        <p>{slideritem.description}</p>
+                        <h1>{t(`slider_title_${slideritem.id}`)}</h1>
+                        <p>{t(`slider_description_${slideritem.id}`)}</p>
                       </div>
                     </div>
                   </div>

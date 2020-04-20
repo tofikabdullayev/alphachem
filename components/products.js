@@ -9,7 +9,8 @@ class Products extends React.Component {
     });
   }
   render() {
-    const { title, description, products } = this.props.productsData;
+    const { products } = this.props.productsData;
+    const { t } = this.props;
     return (
       <section id="mu-portfolio">
         <div className="container">
@@ -19,8 +20,8 @@ class Products extends React.Component {
                 <div className="row">
                   <div className="col-md-12">
                     <div className="mu-title">
-                      <h2>{title}</h2>
-                      <p>{description}</p>
+                      <h2>{t('products_title')}</h2>
+                      <p>{t('products_description')}</p>
                     </div>
                   </div>
                 </div>

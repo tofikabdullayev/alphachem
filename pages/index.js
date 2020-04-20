@@ -11,14 +11,13 @@ const Index = ({ t }) => {
   return (
     <div>
       <Head>
-        <title>Alphachem - Home</title>
+        <title>Alphachem - {t('nav./')}</title>
       </Head>
       <Header pageTitle="Home" t={t} />
-      <Slider sliderData={sliderData} />
+      <Slider sliderData={sliderData} t={t} />
       <main>
-        <div>{t('test')}</div>
-        <About />
-        <Products productsData={productsData} />
+        <About t={t} />
+        <Products productsData={productsData} t={t} />
       </main>
     </div>
   );

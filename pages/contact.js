@@ -8,7 +8,7 @@ const ContactPage = ({ t }) => (
       <title>Alphachem - Contacts</title>
     </Head>
     <Header pageTitle="Contact us" t={t} />
-    <PageHeader title="Contact us" />
+    <PageHeader title="/contact" t={t} />
     <main>
       <section id="mu-contact">
         <div className="container-fluid">
@@ -18,12 +18,8 @@ const ContactPage = ({ t }) => (
                 <div className="row">
                   <div className="col-md-12">
                     <div className="mu-title">
-                      <h2>Say Hello!</h2>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing
-                        elit. Aenean commodo ligula eget dolor. Aenean massa cum
-                        sociis.
-                      </p>
+                      <h2>{t('contact_say_hello')}</h2>
+                      <p>{t('contact_description')}</p>
                     </div>
                   </div>
                 </div>
@@ -31,7 +27,7 @@ const ContactPage = ({ t }) => (
                   <div className="row">
                     <div className="col-md-12">
                       <div className="mu-single-footer">
-                        <h3>Contact Information</h3>
+                        <h3> {t('contact_info')}</h3>
                         <ul className="list-unstyled">
                           <li className="media">
                             <span className="fa fa-home"></span>
@@ -78,5 +74,9 @@ const ContactPage = ({ t }) => (
     `}</style>
   </div>
 );
+
+ContactPage.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
 
 export default withTranslation('common')(ContactPage);

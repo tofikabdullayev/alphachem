@@ -10,11 +10,15 @@ const ProductsPage = ({ t }) => (
       <title>Alphachem - Chemical products</title>
     </Head>
     <Header pageTitle="Chemical products" t={t} />
-    <PageHeader title="Chemical products" />
+    <PageHeader title="/products" t={t} />
     <main>
-      <Products productsData={productsData} />
+      <Products productsData={productsData} t={t} />
     </main>
   </div>
 );
+
+ProductsPage.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
 
 export default withTranslation('common')(ProductsPage);
