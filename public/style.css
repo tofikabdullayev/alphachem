@@ -2837,7 +2837,7 @@ a:focus,
 
 @media (max-width: 1199px) {
 	.navbar-brand.mu-logo {
-		max-width: 240px;
+		max-width: 200px;
 	}
 
 	.mu-single-slide-content-area {
