@@ -6,7 +6,7 @@ const LanguageSwitcher = ({ selectedlang, changeLang }) => {
   const [open, setOpened] = useState(false);
   const setLang = (lang) => {
     changeLang(lang);
-    setOpened(!open);
+    setOpened(false);
   };
 
   return (
