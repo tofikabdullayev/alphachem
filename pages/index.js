@@ -16,6 +16,7 @@ const Index = ({ t }) => {
       <Header pageTitle="Home" />
       <Slider sliderData={sliderData} />
       <main>
+        <div>{t('test')}</div>
         <About />
         <Products productsData={productsData} />
       </main>

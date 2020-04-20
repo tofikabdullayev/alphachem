@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { i18n } from '../i18n';
 
 const langs = ['az', 'en', 'ru'];
 
-const LanguageSwitcher = ({ changeLang }) => {
+const LanguageSwitcher = ({ selectedlang, changeLang }) => {
   const [open, setOpened] = useState(false);
   const setLang = (lang) => {
     changeLang(lang);
@@ -18,14 +17,14 @@ const LanguageSwitcher = ({ changeLang }) => {
           e.preventDefault();
           setOpened(true);
         }}
-        className={open && 'opened'}
+        className={open ? 'opened' : ''}
       >
-        {i18n.language}
+        {selectedlang}
       </a>
-      <ul className={open && 'opened'}>
+      <ul className={open ? 'opened' : ''}>
         {langs.map(
           (lang) =>
-            lang !== i18n.language && (
+            lang !== selectedlang && (
               <li key={lang} onClick={() => setLang(lang)}>
                 {lang}
               </li>

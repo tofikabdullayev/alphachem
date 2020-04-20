@@ -66,7 +66,10 @@ const Header = ({ pageTitle }) => {
             </ul>
           </div>
 
-          <LanguageSwitcher changeLang={changeLang} />
+          <LanguageSwitcher
+            changeLang={changeLang}
+            selectedlang={i18n.language}
+          />
         </nav>
       </div>
     </header>
