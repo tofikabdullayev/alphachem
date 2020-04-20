@@ -1,5 +1,3 @@
-import Axios from 'axios';
-
 class Products extends React.Component {
   componentDidMount() {
     $('.mu-imglink').magnificPopup({
@@ -9,7 +7,6 @@ class Products extends React.Component {
         enabled: true,
       },
     });
-    Axios.get('/products').then((a) => console.log(a));
   }
   render() {
     const { title, description, products } = this.props.productsData;

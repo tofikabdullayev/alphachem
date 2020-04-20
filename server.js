@@ -17,7 +17,7 @@ const handle = app.getRequestHandler();
   await nextI18next.initPromise;
   server.use(nextI18NextMiddleware(nextI18next));
 
-  server.get('/products', (req, res) => {
+  server.get('/api/products', (req, res) => {
     res.json(products);
   });
 

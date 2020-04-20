@@ -22,7 +22,7 @@ const routes = [
   },
 ];
 
-const Header = ({ pageTitle }) => {
+const Header = ({ pageTitle, t }) => {
   function changeLang(lang) {
     i18n.changeLanguage(lang);
   }
@@ -59,7 +59,7 @@ const Header = ({ pageTitle }) => {
                   key={index}
                 >
                   <Link href={route.path}>
-                    <a>{route.title}</a>
+                    <a>{t(`nav.${route.path}`)}</a>
                   </Link>
                 </li>
               ))}

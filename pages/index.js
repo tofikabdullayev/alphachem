@@ -13,7 +13,7 @@ const Index = ({ t }) => {
       <Head>
         <title>Alphachem - Home</title>
       </Head>
-      <Header pageTitle="Home" />
+      <Header pageTitle="Home" t={t} />
       <Slider sliderData={sliderData} />
       <main>
         <div>{t('test')}</div>

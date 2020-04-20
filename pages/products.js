@@ -3,13 +3,13 @@ import Products from '../components/products';
 import PageHeader from '../components/pageHeader';
 import { productsData } from '../data/products';
 import Head from 'next/head';
-
-const ProductsPage = () => (
+import { withTranslation } from '../i18n';
+const ProductsPage = ({ t }) => (
   <div>
     <Head>
       <title>Alphachem - Chemical products</title>
     </Head>
-    <Header pageTitle="Products" />
+    <Header pageTitle="Chemical products" t={t} />
     <PageHeader title="Chemical products" />
     <main>
       <Products productsData={productsData} />
@@ -17,4 +17,4 @@ const ProductsPage = () => (
   </div>
 );
 
-export default ProductsPage;
+export default withTranslation('common')(ProductsPage);

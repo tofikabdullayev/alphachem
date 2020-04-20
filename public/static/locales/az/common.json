@@ -1,4 +1,10 @@
 {
     "test": "[AZ] Some test text",
-    "test2": "[AZ] test2"
+    "test2": "[AZ] test2",
+    "nav": {
+        "/": "Ana səhifə",
+        "/about": "Haqqımızda",
+        "/products": "Məhsullar",
+        "/contact": "Əlaqə"
+    }
 }

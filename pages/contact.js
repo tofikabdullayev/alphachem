@@ -1,13 +1,13 @@
 import Header from '../components/header';
 import PageHeader from '../components/pageHeader';
 import Head from 'next/head';
-
-const ContactPage = () => (
+import { withTranslation } from '../i18n';
+const ContactPage = ({ t }) => (
   <div>
     <Head>
       <title>Alphachem - Contacts</title>
     </Head>
-    <Header pageTitle="Contact us" />
+    <Header pageTitle="Contact us" t={t} />
     <PageHeader title="Contact us" />
     <main>
       <section id="mu-contact">
@@ -79,4 +79,4 @@ const ContactPage = () => (
   </div>
 );
 
-export default ContactPage;
+export default withTranslation('common')(ContactPage);

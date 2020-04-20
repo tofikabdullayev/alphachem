@@ -35,10 +35,12 @@ const LanguageSwitcher = ({ selectedlang, changeLang }) => {
       <style jsx>{`
       .lang-switcher{
           position: relative;
+          margin-left: 5px;
       }
       @media(max-width: 640px){
             .lang-switcher{
-                width: 100%
+                width: 100%;
+                margin-left: 0px;
             }
         }
         .lang-switcher ul {

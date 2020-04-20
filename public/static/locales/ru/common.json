@@ -1,4 +1,10 @@
 {
     "test": "[RU] Some test text",
-    "test2": "[RU] test2"
+    "test2": "[RU] test2",
+    "nav": {
+        "/": "Главная",
+        "/about": "О компании",
+        "/products": "Товары",
+        "/contact": "Контакты"
+    }
 }
