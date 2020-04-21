@@ -9,7 +9,8 @@ class Products extends React.Component {
     });
   }
   render() {
-    const { products } = this.props.productsData;
+    const products = this.props.productsData;
+
     const { t } = this.props;
     return (
       <section id="mu-portfolio">

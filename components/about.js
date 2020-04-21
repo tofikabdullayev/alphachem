@@ -1,4 +1,6 @@
-const About = ({ t }) => (
+import { i18n } from '../i18n';
+
+const About = ({ t, aboutData }) => (
   <section id="mu-about">
     <div className="container">
       <div className="row">
@@ -22,33 +24,13 @@ const About = ({ t }) => (
               <div className="col-md-6">
                 <div className="mu-about-right">
                   <ul>
-                    <li>
-                      <h3>Our Mission</h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing
-                        elit. Aenean commodo ligula eget dolor. Aenean massa.
-                        Cum sociis natoque penatibus et magnis dis parturient
-                        montes, nascetur ridiculus mus. Donec quam felis,
-                      </p>
-                    </li>
-                    <li>
-                      <h3>Our Vision</h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing
-                        elit. Aenean commodo ligula eget dolor. Aenean massa.
-                        Cum sociis natoque penatibus et magnis dis parturient
-                        montes, nascetur ridiculus mus. Donec quam felis,
-                      </p>
-                    </li>
-                    <li>
-                      <h3>Our Valuse</h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing
-                        elit. Aenean commodo ligula eget dolor. Aenean massa.
-                        Cum sociis natoque penatibus et magnis dis parturient
-                        montes, nascetur ridiculus mus. Donec quam felis,
-                      </p>
-                    </li>
+                    {aboutData &&
+                      aboutData.map((about) => (
+                        <li key={about.title}>
+                          <h3>{about.title[i18n.language]}</h3>
+                          <p>{about.description[i18n.language]}</p>
+                        </li>
+                      ))}
                   </ul>
                 </div>
               </div>

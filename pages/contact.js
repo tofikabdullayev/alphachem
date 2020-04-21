@@ -1,8 +1,10 @@
 import Header from '../components/header';
 import PageHeader from '../components/pageHeader';
 import Head from 'next/head';
-import { withTranslation } from '../i18n';
-const ContactPage = ({ t }) => (
+import { withTranslation, i18n } from '../i18n';
+import axios from 'axios';
+
+const ContactPage = ({ t, contactData }) => (
   <div>
     <Head>
       <title>Alphachem - Contacts</title>
@@ -32,21 +34,25 @@ const ContactPage = ({ t }) => (
                           <li className="media">
                             <span className="fa fa-home"></span>
                             <div className="media-body">
-                              <p>349 Main St, Deseronto, ON K0K 1X0, Canada</p>
+                              <p>{contactData.adress[i18n.language]}</p>
                             </div>
                           </li>
                           <li className="media">
                             <span className="fa fa-phone"></span>
                             <div className="media-body">
-                              <p>+00 123 456 789 00</p>
-                              <p>+ 00 254 632 548 00</p>
+                              {contactData.phones &&
+                                contactData.phones.map((phone) => (
+                                  <p key={phone}>{phone}</p>
+                                ))}
                             </div>
                           </li>
                           <li className="media">
                             <span className="fa fa-envelope"></span>
                             <div className="media-body">
-                              <p>support@bhero.com</p>
-                              <p>help.behero@gmail.com</p>
+                              {contactData.emails &&
+                                contactData.emails.map((email) => (
+                                  <p key={email}>{email}</p>
+                                ))}
                             </div>
                           </li>
                         </ul>
@@ -75,8 +81,13 @@ const ContactPage = ({ t }) => (
   </div>
 );
 
-ContactPage.getInitialProps = async () => ({
-  namespacesRequired: ['common'],
-});
+ContactPage.getInitialProps = async ({ req }) => {
+  const baseUrl = req ? `${req.protocol}://${req.get('Host')}` : '';
+  const contactData = await (await axios.get(`${baseUrl}/api/contact`)).data;
+  return {
+    namespacesRequired: ['common'],
+    contactData,
+  };
+};
 
 export default withTranslation('common')(ContactPage);

@@ -1,0 +1,9 @@
+{
+    "adress": {
+        "az": "[AZ]349 Main St, Deseronto, ON K0K 1X0, Canada",
+        "en": "[EN]349 Main St, Deseronto, ON K0K 1X0, Canada",
+        "ru": "[RU]349 Main St, Deseronto, ON K0K 1X0, Canada"
+    },
+    "phones": ["+00 123 456 789 00", "+ 00 254 632 548 00"],
+    "emails": ["support@alphachem.com", "help.alphachem@gmail.com"]
+}
