@@ -1,37 +1,74 @@
-[{
-        "title": "Vaseline",
-        "imageSrc": "/products/vaseline.jpg"
+[
+  {
+    "title": {
+      "az": "[AZ]Vaseline",
+      "en": "[EN]Vaseline",
+      "ru": "[RU]Vaseline"
     },
-    {
-        "title": "product - 1",
-        "imageSrc": "/products/1.jpg"
+    "imageSrc": "/products/vaseline.jpg"
+  },
+  {
+    "title": {
+      "az": "[AZ]product - 1",
+      "en": "[EN]product - 1",
+      "ru": "[RU]product - 1"
     },
-    {
-        "title": "product - 2",
-        "imageSrc": "/products/2.jpg"
+    "imageSrc": "/products/1.jpg"
+  },
+  {
+    "title": {
+      "az": "[AZ]product - 2",
+      "en": "[EN]product - 2",
+      "ru": "[RU]product - 2"
     },
-    {
-        "title": "product - 3",
-        "imageSrc": "/products/3.jpg"
+    "imageSrc": "/products/2.jpg"
+  },
+  {
+    "title": {
+      "az": "[AZ]product - 3",
+      "en": "[EN]product - 3",
+      "ru": "[RU]product - 3"
     },
-    {
-        "title": "product - 4",
-        "imageSrc": "/products/4.jpg"
+    "imageSrc": "/products/3.jpg"
+  },
+  {
+    "title": {
+      "az": "[AZ]product - 4",
+      "en": "[EN]product - 4",
+      "ru": "[RU]product - 4"
     },
-    {
-        "title": "product - 6",
-        "imageSrc": "/products/6.jpg"
+    "imageSrc": "/products/4.jpg"
+  },
+  {
+    "title": {
+      "az": "[AZ]product - 6",
+      "en": "[EN]product - 6",
+      "ru": "[RU]product - 6"
     },
-    {
-        "title": "product - 7",
-        "imageSrc": "/products/7.png"
+    "imageSrc": "/products/6.jpg"
+  },
+  {
+    "title": {
+      "az": "[AZ]product - 7",
+      "en": "[EN]product - 7",
+      "ru": "[RU]product - 7"
     },
-    {
-        "title": "product - 8",
-        "imageSrc": "/products/8.jpg"
+    "imageSrc": "/products/7.png"
+  },
+  {
+    "title": {
+      "az": "[AZ]product - 8",
+      "en": "[EN]product - 8",
+      "ru": "[RU]product - 8"
     },
-    {
-        "title": "product - 9",
-        "imageSrc": "/products/9.jpg"
-    }
+    "imageSrc": "/products/8.jpg"
+  },
+  {
+    "title": {
+      "az": "[AZ]product - 9",
+      "en": "[EN]product - 9",
+      "ru": "[RU]product - 9"
+    },
+    "imageSrc": "/products/9.jpg"
+  }
 ]

@@ -1,3 +1,5 @@
+import { i18n } from '../i18n';
+
 class Products extends React.Component {
   componentDidMount() {
     $('.mu-imglink').magnificPopup({
@@ -34,12 +36,12 @@ class Products extends React.Component {
                         products.map((product) => (
                           <div
                             className="col-xs-6 col-sm-6 col-md-4 filtr-item"
-                            key={product.title}
+                            key={JSON.stringify(product.title)}
                           >
                             <a
                               className="mu-imglink"
                               href={product.imageSrc}
-                              title={product.title}
+                              title={product.title[i18n.language]}
                             >
                               <img
                                 className="img-responsive"
@@ -48,7 +50,7 @@ class Products extends React.Component {
                               />
                               <div className="mu-filter-item-content">
                                 <h4 className="mu-filter-item-title">
-                                  {product.title}
+                                  {product.title[i18n.language]}
                                 </h4>
                                 <span className="fa fa-long-arrow-right"></span>
                               </div>
