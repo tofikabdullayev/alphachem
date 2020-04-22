@@ -36,7 +36,7 @@ class Products extends React.Component {
                         products.map((product) => (
                           <div
                             className="col-xs-6 col-sm-6 col-md-4 filtr-item"
-                            key={JSON.stringify(product.title)}
+                            key={product._id}
                           >
                             <a
                               className="mu-imglink"
