@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "node server.js",
+    "devServer": "nodemon server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server.js"
   },
@@ -18,5 +19,9 @@
     "next-i18next": "^4.3.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "dotenv": "^8.0.0",
+    "nodemon": "^1.19.0"
   }
 }

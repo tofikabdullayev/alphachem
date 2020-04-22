@@ -1,0 +1,27 @@
+POST http://localhost:3000/api/contact/create HTTP/1.1
+content-type: application/json
+
+{
+    "adress": {
+        "az": "[AZ]349 Main St, Deseronto, ON K0K 1X0, Canada",
+        "en": "[EN]349 Main St, Deseronto, ON K0K 1X0, Canada",
+        "ru": "[RU]349 Main St, Deseronto, ON K0K 1X0, Canada"
+    },
+    "phones": ["+00 123 456 789 00", "+ 00 254 632 548 00"],
+    "emails": ["support@alphachem.com", "help.alphachem@gmail.com"]
+}
+
+###
+
+PUT http://localhost:3000/api/contact/update HTTP/1.1
+content-type: application/json
+
+{
+    "adress": {
+        "az": "[AZ]349 Main St, Deseronto, ON K0K 1X0, Canada",
+        "en": "[EN]349 Main St, Deseronto, ON K0K 1X0, Canada",
+        "ru": "[RU]349 Main St, Deseronto, ON K0K 1X0, Canada"
+    },
+    "phones": ["+00 123 456 789ssss1q123 00", "+ 00 254 632 548 00"],
+    "emails": ["support@alphachem.com", "help.alphachem@gmail.com"]
+}
