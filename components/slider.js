@@ -1,3 +1,5 @@
+import { i18n } from '../i18n';
+
 class Slider extends React.Component {
   componentDidMount() {
     $('.mu-slide').slick({
@@ -22,8 +24,8 @@ class Slider extends React.Component {
                   <div className="row">
                     <div className="col-md-12">
                       <div className="mu-single-slide-content">
-                        <h1>{slideritem.title}</h1>
-                        <p>{slideritem.description}</p>
+                        <h1>{slideritem.title[i18n.language]}</h1>
+                        <p>{slideritem.description[i18n.language]}</p>
                       </div>
                     </div>
                   </div>

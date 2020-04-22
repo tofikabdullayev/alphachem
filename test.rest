@@ -73,25 +73,25 @@ content-type: application/json
 
 {
     "title": {
-      "az": "[AZ]product - 3",
-      "en": "[EN]product - 3",
-      "ru": "[RU]product - 3"
+      "az": "[AZ]vaseline",
+      "en": "[EN]vaseline",
+      "ru": "[RU]vaseline"
     },
-    "imageSrc": "/products/1.jpg"
+    "imageSrc": "/products/vaseline.jpg"
 }
 
 ###
 
-PUT http://localhost:3000/api/products/5ea08439bf6faf65247bd4b5 HTTP/1.1
+PUT http://localhost:3000/api/products/5ea0b03af774454d211ac061 HTTP/1.1
 content-type: application/json
 
 {
     "title": {
-      "az": "[AZ]product - 2",
-      "en": "[EN]product - 2",
-      "ru": "[RU]product - 2"
+      "az": "[AZ]product - 7",
+      "en": "[EN]product - 7",
+      "ru": "[RU]product - 7"
     },
-    "imageSrc": "/products/2.jpg"
+    "imageSrc": "/products/7.png"
 }
 
 ###
@@ -106,8 +106,16 @@ POST http://localhost:3000/api/slider/ HTTP/1.1
 content-type: application/json
 
 {
-    "title": "Slider title 1",
-    "description": "slider description 1",
+    "title": {
+      "az": "[AZ]Slider title 1",
+      "en": "[EN]Slider title 1",
+      "ru": "[RU]Slider title 1"
+    },
+    "description": {
+      "az": "[AZ]Slider description 1",
+      "en": "[EN]Slider description 1",
+      "ru": "[RU]Slider description 1"
+    },
     "imageSrc": "/slider/slider-1.jpg"
 }
 
@@ -117,8 +125,16 @@ PUT http://localhost:3000/api/slider/5ea087ced8c772289cc28db6 HTTP/1.1
 content-type: application/json
 
 {
-    "title": "Slider title 2",
-    "description": "slider description 2",
+    "title": {
+      "az": "[AZ]Slider title 2",
+      "en": "[EN]Slider title 2",
+      "ru": "[RU]Slider title 2"
+    },
+    "description": {
+      "az": "[AZ]Slider description 2",
+      "en": "[EN]Slider description 2",
+      "ru": "[RU]Slider description 2"
+    },
     "imageSrc": "/slider/slider-2.jpg"
 }
 
