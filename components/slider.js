@@ -15,15 +15,15 @@ class Slider extends React.Component {
       <div id="mu-slider">
         <div className="mu-slide">
           {this.props.sliderData.map((slideritem) => (
-            <div className="mu-single-slide" key={slideritem.id}>
+            <div className="mu-single-slide" key={slideritem._id}>
               <img src={slideritem.imageSrc} alt="slider img" />
               <div className="mu-single-slide-content-area">
                 <div className="container">
                   <div className="row">
                     <div className="col-md-12">
                       <div className="mu-single-slide-content">
-                        <h1>{t(`slider_title_${slideritem.id}`)}</h1>
-                        <p>{t(`slider_description_${slideritem.id}`)}</p>
+                        <h1>{slideritem.title}</h1>
+                        <p>{slideritem.description}</p>
                       </div>
                     </div>
                   </div>

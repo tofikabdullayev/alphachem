@@ -32,6 +32,9 @@ const handle = app.getRequestHandler();
   const productsRouter = require('./routes/products');
   server.use('/api/products', productsRouter);
 
+  const sliderRouter = require('./routes/slider');
+  server.use('/api/slider', sliderRouter);
+
   await nextI18next.initPromise;
   server.use(nextI18NextMiddleware(nextI18next));
 

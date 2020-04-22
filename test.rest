@@ -97,3 +97,31 @@ content-type: application/json
 ###
 
 DELETE  http://localhost:3000/api/products/5ea08439bf6faf65247bd4b5 HTTP/1.1
+
+
+###
+
+
+POST http://localhost:3000/api/slider/ HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Slider title 1",
+    "description": "slider description 1",
+    "imageSrc": "/slider/slider-1.jpg"
+}
+
+###
+
+PUT http://localhost:3000/api/slider/5ea087ced8c772289cc28db6 HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Slider title 2",
+    "description": "slider description 2",
+    "imageSrc": "/slider/slider-2.jpg"
+}
+
+###
+
+DELETE  http://localhost:3000/api/slider/5ea087c3d8c772289cc28db5 HTTP/1.1
