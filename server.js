@@ -26,6 +26,9 @@ const handle = app.getRequestHandler();
   const contactsRouter = require('./routes/contacts');
   server.use('/api/contact', contactsRouter);
 
+  const aboutRouter = require('./routes/about');
+  server.use('/api/about', aboutRouter);
+
   await nextI18next.initPromise;
   server.use(nextI18NextMiddleware(nextI18next));
 
