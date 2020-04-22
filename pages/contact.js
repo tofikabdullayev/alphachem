@@ -27,7 +27,7 @@ const ContactPage = ({ t, contactData }) => (
                 </div>
                 <div className="mu-contact-content">
                   <div className="row">
-                    <div className="col-md-12">
+                    <div className="col-md-6">
                       <div className="mu-single-footer">
                         <h3> {t('contact_info')}</h3>
                         <ul className="list-unstyled">
@@ -58,6 +58,22 @@ const ContactPage = ({ t, contactData }) => (
                         </ul>
                       </div>
                     </div>
+                    <div className="col-md-6">
+                      <div class="mapouter">
+                        <div class="gmap_canvas">
+                          <iframe
+                            width="100%"
+                            height="500"
+                            id="gmap_canvas"
+                            src="https://maps.google.com/maps?ll=40.3834610547961%2C49.89322600000003&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                            frameborder="0"
+                            scrolling="no"
+                            marginheight="0"
+                            marginwidth="0"
+                          ></iframe>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -76,6 +92,18 @@ const ContactPage = ({ t, contactData }) => (
       }
       .media-body {
         flex: inherit;
+      }
+      .mapouter {
+        position: relative;
+        text-align: right;
+        height: 500px;
+        width: 600px;
+      }
+      .gmap_canvas {
+        overflow: hidden;
+        background: none !important;
+        height: 500px;
+        width: 600px;
       }
     `}</style>
   </div>
