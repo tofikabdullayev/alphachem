@@ -29,6 +29,9 @@ const handle = app.getRequestHandler();
   const aboutRouter = require('./routes/about');
   server.use('/api/about', aboutRouter);
 
+  const productsRouter = require('./routes/products');
+  server.use('/api/products', productsRouter);
+
   await nextI18next.initPromise;
   server.use(nextI18NextMiddleware(nextI18next));
 

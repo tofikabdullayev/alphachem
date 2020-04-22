@@ -65,3 +65,35 @@ content-type: application/json
 ###
 
 DELETE  http://localhost:3000/api/about/5ea079b28808f54914393501 HTTP/1.1
+
+###
+
+POST http://localhost:3000/api/products/ HTTP/1.1
+content-type: application/json
+
+{
+    "title": {
+      "az": "[AZ]product - 3",
+      "en": "[EN]product - 3",
+      "ru": "[RU]product - 3"
+    },
+    "imageSrc": "/products/1.jpg"
+}
+
+###
+
+PUT http://localhost:3000/api/products/5ea08439bf6faf65247bd4b5 HTTP/1.1
+content-type: application/json
+
+{
+    "title": {
+      "az": "[AZ]product - 2",
+      "en": "[EN]product - 2",
+      "ru": "[RU]product - 2"
+    },
+    "imageSrc": "/products/2.jpg"
+}
+
+###
+
+DELETE  http://localhost:3000/api/products/5ea08439bf6faf65247bd4b5 HTTP/1.1
