@@ -1,4 +1,4 @@
-POST http://localhost:3000/api/contact/create HTTP/1.1
+POST http://localhost:3000/api/contact/ HTTP/1.1
 content-type: application/json
 
 {
@@ -13,7 +13,7 @@ content-type: application/json
 
 ###
 
-PUT http://localhost:3000/api/contact/update HTTP/1.1
+PUT http://localhost:3000/api/contact/ HTTP/1.1
 content-type: application/json
 
 {

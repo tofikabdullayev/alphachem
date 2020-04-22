@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/create', async (req, res) => {
+router.post('/', async (req, res) => {
   const contacts = new Contacts({
     collectionName: 'contacts',
     adress: {
@@ -30,7 +30,7 @@ router.post('/create', async (req, res) => {
   }
 });
 
-router.put('/update', async (req, res) => {
+router.put('/', async (req, res) => {
   const contacts = {
     collectionName: 'contacts',
     adress: {
