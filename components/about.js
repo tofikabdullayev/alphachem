@@ -26,7 +26,7 @@ const About = ({ t, aboutData }) => (
                   <ul>
                     {aboutData &&
                       aboutData.map((about) => (
-                        <li key={about.title}>
+                        <li key={JSON.stringify(about.title)}>
                           <h3>{about.title[i18n.language]}</h3>
                           <p>{about.description[i18n.language]}</p>
                         </li>
