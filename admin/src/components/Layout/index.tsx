@@ -17,7 +17,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       <div className={classes.contentWrapper}>
         <Header />
-        {children}
+        <div className={classes.content}>{children}</div>
       </div>
     </div>
   );
