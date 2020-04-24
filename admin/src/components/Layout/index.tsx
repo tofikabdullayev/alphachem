@@ -1,6 +1,6 @@
 import React from 'react';
 import useStyles from './styles';
-import Grid from '@material-ui/core/Grid';
+import Sidebar from '../Sidebar';
 
 export interface LayoutProps {
   children: React.ReactNode;
@@ -10,15 +10,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item sm={3}>
-          <div>Sidebar</div>
-        </Grid>
-        <Grid item sm={9}>
-          <div>header</div>
-          {children}
-        </Grid>
-      </Grid>
+      <div className={classes.sidebar}>
+        <Sidebar />
+      </div>
+
+      <div className={classes.contentWrapper}>
+        <div>header</div>
+        {children}
+      </div>
     </div>
   );
 };
