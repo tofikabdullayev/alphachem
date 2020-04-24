@@ -12,7 +12,7 @@ export default makeStyles((theme: Theme) =>
       width: '300px',
     },
     contentWrapper: {
-      width: 'calc(100% - 300px)',
+      width: '100%',
       height: '100%',
     },
   })
