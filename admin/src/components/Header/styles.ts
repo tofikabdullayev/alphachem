@@ -4,18 +4,13 @@ export default makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
-      height: '100vh',
+      height: '50px',
+      display: 'flex',
+      flexDirection: 'row',
       backgroundColor: 'rgb(0%,52.549744%,63.137817%) !important',
-      color: '#fff !important',
-      '& a': {
-        color: 'white',
-        textDecoration: 'none',
-      },
-    },
-    logo: {
-      maxWidth: '100%',
-      display: 'block',
-      margin: '0 auto 20px',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      padding: '0 12px',
     },
   })
 );

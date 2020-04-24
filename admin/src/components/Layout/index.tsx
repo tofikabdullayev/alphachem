@@ -1,6 +1,7 @@
 import React from 'react';
 import useStyles from './styles';
 import Sidebar from '../Sidebar';
+import Header from '../Header';
 
 export interface LayoutProps {
   children: React.ReactNode;
@@ -15,7 +16,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </div>
 
       <div className={classes.contentWrapper}>
-        <div>header</div>
+        <Header />
         {children}
       </div>
     </div>
