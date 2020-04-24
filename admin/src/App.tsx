@@ -1,14 +1,14 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+import { Switch, Route } from 'react-router-dom';
+import HomePage from './pages/Home';
 
 function App() {
   return (
-    <div className="App">
-      Admin panel is loading ...{' '}
-      <Button variant="contained" color="primary">
-        Start
-      </Button>
-    </div>
+    <>
+      <Switch>
+        <Route path="/" component={HomePage} exact />
+      </Switch>
+    </>
   );
 }
 
