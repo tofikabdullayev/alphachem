@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -6,6 +6,8 @@ import Input from '@material-ui/core/Input';
 import AddItem from '../components/AddItem';
 import DataTable from '../components/Table';
 import useStyles from './styles';
+// import { useDispatch } from 'react-redux'
+import { getProducts } from './../store/actions/products';
 
 export interface ProductsProps {}
 
@@ -117,6 +119,10 @@ const ProductsPage: React.FC<ProductsProps> = () => {
       ruTitle,
       image: productImage.current.children[0].value,
     });
+
+  useEffect(() => {
+    getProducts()();
+  }, []);
 
   return (
     <Layout>
