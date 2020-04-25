@@ -5,108 +5,21 @@ import TextField from '@material-ui/core/TextField';
 import Input from '@material-ui/core/Input';
 import AddItem from '../components/AddItem';
 import DataTable from '../components/Table';
+import Loading from '../components/loading';
 import useStyles from './styles';
-// import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from './../store/actions/products';
+import { Product } from '../store/interfaces';
 
 export interface ProductsProps {}
-
-const data = [
-  {
-    title: {
-      az: '[AZ]product - 1',
-      en: '[EN]product - 1',
-      ru: '[RU]product - 1',
-    },
-    _id: '5ea08427bf6faf65247bd4b4',
-    imageSrc: '/products/1.jpg',
-    __v: 0,
-  },
-  {
-    title: {
-      az: '[AZ]product - 2',
-      en: '[EN]product - 2',
-      ru: '[RU]product - 2',
-    },
-    _id: '5ea0b013f774454d211ac05d',
-    imageSrc: '/products/2.jpg',
-    __v: 0,
-  },
-  {
-    title: {
-      az: '[AZ]product - 3',
-      en: '[EN]product - 3',
-      ru: '[RU]product - 3',
-    },
-    _id: '5ea0b021f774454d211ac05e',
-    imageSrc: '/products/3.jpg',
-    __v: 0,
-  },
-  {
-    title: {
-      az: '[AZ]product - 4',
-      en: '[EN]product - 4',
-      ru: '[RU]product - 4',
-    },
-    _id: '5ea0b02bf774454d211ac05f',
-    imageSrc: '/products/4.jpg',
-    __v: 0,
-  },
-  {
-    title: {
-      az: '[AZ]product - 6',
-      en: '[EN]product - 6',
-      ru: '[RU]product - 6',
-    },
-    _id: '5ea0b032f774454d211ac060',
-    imageSrc: '/products/6.jpg',
-    __v: 0,
-  },
-  {
-    title: {
-      az: '[AZ]product - 7',
-      en: '[EN]product - 7',
-      ru: '[RU]product - 7',
-    },
-    _id: '5ea0b03af774454d211ac061',
-    imageSrc: '/products/7.png',
-    __v: 0,
-  },
-  {
-    title: {
-      az: '[AZ]product - 8',
-      en: '[EN]product - 8',
-      ru: '[RU]product - 8',
-    },
-    _id: '5ea0b041f774454d211ac062',
-    imageSrc: '/products/8.jpg',
-    __v: 0,
-  },
-  {
-    title: {
-      az: '[AZ]product - 9',
-      en: '[EN]product - 9',
-      ru: '[RU]product - 9',
-    },
-    _id: '5ea0b046f774454d211ac063',
-    imageSrc: '/products/9.jpg',
-    __v: 0,
-  },
-  {
-    title: {
-      az: '[AZ]vaseline',
-      en: '[EN]vaseline',
-      ru: '[RU]vaseline',
-    },
-    _id: '5ea0b056f774454d211ac064',
-    imageSrc: '/products/vaseline.jpg',
-    __v: 0,
-  },
-];
 
 const headRows = ['Image', '[AZ] Title', '[EN] Title', '[RU] Title'];
 
 const ProductsPage: React.FC<ProductsProps> = () => {
+  const dispatch = useDispatch();
+  const products = useSelector(
+    (state: { products: Product[] }) => state.products
+  );
   const classes = useStyles();
   const [azTitle, setAzTitle] = useState<string>('');
   const [enTitle, setEnTitle] = useState<string>('');
@@ -121,8 +34,8 @@ const ProductsPage: React.FC<ProductsProps> = () => {
     });
 
   useEffect(() => {
-    getProducts()();
-  }, []);
+    dispatch(getProducts());
+  }, [dispatch]);
 
   return (
     <Layout>
@@ -160,7 +73,11 @@ const ProductsPage: React.FC<ProductsProps> = () => {
           </form>
         </AddItem>
       </div>
-      <DataTable data={data} tableHeader={headRows} />
+      {products.length > 0 ? (
+        <DataTable data={products} tableHeader={headRows} />
+      ) : (
+        <Loading />
+      )}
     </Layout>
   );
 };
