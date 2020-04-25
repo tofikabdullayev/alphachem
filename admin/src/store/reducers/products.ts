@@ -12,7 +12,7 @@ export default function productsReducer(
 ) {
   switch (action.type) {
     case GET_PRODUCTS_COMPLETE:
-      return [...(state as Product[]), ...action.products];
+      return [...action.products];
     case GET_PRODUCTS_ERROR:
       return null;
     default:
