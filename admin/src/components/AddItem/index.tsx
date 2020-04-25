@@ -11,9 +11,14 @@ import { useTheme } from '@material-ui/core/styles';
 interface AddItemProps {
   title: string;
   children: React.ReactNode;
+  submitHandler: () => void;
 }
 
-const AddItem: React.FC<AddItemProps> = ({ title, children }) => {
+const AddItem: React.FC<AddItemProps> = ({
+  title,
+  children,
+  submitHandler,
+}) => {
   const [open, setOpen] = useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -23,6 +28,7 @@ const AddItem: React.FC<AddItemProps> = ({ title, children }) => {
   };
 
   const handleClose = () => {
+    submitHandler();
     setOpen(false);
   };
 
