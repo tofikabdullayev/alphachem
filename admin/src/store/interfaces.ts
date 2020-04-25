@@ -4,11 +4,8 @@ export interface Product {
   imageSrc: string;
 }
 
-export interface Slider {
-  title: Lang;
+export interface Slider extends Product {
   description: Lang;
-  _id: string;
-  imageSrc: string;
 }
 
 interface Lang {
