@@ -1,6 +1,6 @@
 export interface Product {
   title: Lang;
-  _id: string;
+  _id?: string;
   imageSrc: string;
 }
 

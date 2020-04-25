@@ -8,7 +8,7 @@ import DataTable from '../components/Table';
 import Loading from '../components/loading';
 import useStyles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts } from './../store/actions/products';
+import { getProducts, addProduct } from './../store/actions/products';
 import { Product } from '../store/interfaces';
 
 export interface ProductsProps {}
@@ -25,13 +25,26 @@ const ProductsPage: React.FC<ProductsProps> = () => {
   const [enTitle, setEnTitle] = useState<string>('');
   const [ruTitle, setRuTitle] = useState<string>('');
   const productImage: React.RefObject<any> = React.createRef();
-  const onSubmit = () =>
-    console.log({
-      azTitle,
-      enTitle,
-      ruTitle,
-      image: productImage.current.children[0].value,
-    });
+  const onSubmit = async () => {
+    const newProduct: Product = {
+      title: {
+        az: azTitle,
+        en: enTitle,
+        ru: ruTitle,
+      },
+      imageSrc: '/vaseline.jpg',
+    };
+    await dispatch(addProduct(newProduct));
+    setOpen(false);
+    setAzTitle('');
+    setEnTitle('');
+    setRuTitle('');
+  };
+
+  const [open, setOpen] = useState(false);
+  const openModal = () => {
+    setOpen(true);
+  };
 
   useEffect(() => {
     dispatch(getProducts());
@@ -49,7 +62,13 @@ const ProductsPage: React.FC<ProductsProps> = () => {
         <Typography variant="h3" component="h3">
           Products
         </Typography>
-        <AddItem title="Add product" submitHandler={onSubmit}>
+        <AddItem
+          title="Add product"
+          submitHandler={onSubmit}
+          isOpen={open}
+          openModal={openModal}
+          closeModal={() => setOpen(false)}
+        >
           <form className={classes.root}>
             <TextField
               label="Product title [AZ]"

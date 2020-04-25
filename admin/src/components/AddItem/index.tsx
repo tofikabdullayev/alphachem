@@ -12,41 +12,42 @@ interface AddItemProps {
   title: string;
   children: React.ReactNode;
   submitHandler: () => void;
+  isOpen: boolean;
+  openModal: () => void;
+  closeModal: () => void;
 }
 
 const AddItem: React.FC<AddItemProps> = ({
   title,
   children,
   submitHandler,
+  isOpen,
+  openModal,
+  closeModal,
 }) => {
-  const [open, setOpen] = useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
   const handleClose = () => {
     submitHandler();
-    setOpen(false);
+    closeModal();
   };
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button variant="outlined" color="primary" onClick={openModal}>
         <AddIcon />
       </Button>
       <Dialog
         fullScreen={fullScreen}
-        open={open}
+        open={isOpen}
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
         <DialogTitle id="responsive-dialog-title">{title}</DialogTitle>
         <DialogContent>{children}</DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
+          <Button autoFocus onClick={closeModal} color="primary">
             Cancel
           </Button>
           <Button onClick={handleClose} color="primary" autoFocus>
