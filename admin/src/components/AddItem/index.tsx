@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -7,11 +7,12 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import AddIcon from '@material-ui/icons/Add';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
+import Loading from '../loading';
 
 interface AddItemProps {
   title: string;
   children: React.ReactNode;
-  submitHandler: () => void;
+  submitHandler: (stopLoading: () => void) => void;
   isOpen: boolean;
   openModal: () => void;
   closeModal: () => void;
@@ -27,10 +28,11 @@ const AddItem: React.FC<AddItemProps> = ({
 }) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const [isLoading, setLoading] = useState<boolean>(false);
 
   const handleClose = () => {
-    submitHandler();
-    closeModal();
+    submitHandler(() => setLoading(false));
+    setLoading(true);
   };
 
   return (
@@ -41,11 +43,15 @@ const AddItem: React.FC<AddItemProps> = ({
       <Dialog
         fullScreen={fullScreen}
         open={isOpen}
-        onClose={handleClose}
+        onClose={closeModal}
         aria-labelledby="responsive-dialog-title"
       >
         <DialogTitle id="responsive-dialog-title">{title}</DialogTitle>
-        <DialogContent>{children}</DialogContent>
+        <DialogContent>
+          {isLoading && <Loading isDialog={true} />}
+
+          {children}
+        </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={closeModal} color="primary">
             Cancel

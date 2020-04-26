@@ -12,12 +12,16 @@ export function getProducts() {
   return async (
     dispatch: (actionCreator: { type: string; products?: Product[] }) => void
   ) => {
-    const response = await Axios.get('/api/products');
+    try {
+      const response = await Axios.get('/api/products');
 
-    if (response.status < 400) {
-      dispatch(getProductsSucces(response.data));
-    } else {
-      dispatch(getProductsError(response.data));
+      if (response.status < 400) {
+        dispatch(getProductsSucces(response.data));
+      } else {
+        dispatch(getProductsError(response.data));
+      }
+    } catch (error) {
+      dispatch(getProductsError(error.response.data.message));
     }
   };
 }
@@ -29,8 +33,11 @@ export function addProduct(product: Product) {
     try {
       dispatch({ type: ADD_PRODUCTS });
       const response = await Axios.post('/api/products', product);
-
-      dispatch(addProductsSucces(response.data));
+      if (response.status < 400) {
+        dispatch(addProductsSucces(response.data));
+      } else {
+        dispatch(addProductsError(response.data));
+      }
     } catch (error) {
       dispatch(addProductsError(error.response.data.message));
     }

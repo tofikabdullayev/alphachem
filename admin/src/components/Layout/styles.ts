@@ -14,6 +14,7 @@ export default makeStyles((theme: Theme) =>
     contentWrapper: {
       width: '100%',
       height: '100%',
+      position: 'relative',
     },
     content: {
       padding: '12px',

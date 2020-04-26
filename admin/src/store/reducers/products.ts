@@ -6,23 +6,38 @@ import {
 } from '../actions/actionTypes';
 import { Product } from '../interfaces';
 
-const initialState: Product[] = [];
+export interface ProductsPageState {
+  products: Product[];
+  errorMessage?: string;
+}
+
+const initialState: ProductsPageState = {
+  products: [],
+};
 
 export default function productsReducer(
-  state: Product[] = initialState,
+  state: ProductsPageState = initialState,
   action: { type: string; products: Product[]; payload?: any; message?: string }
 ) {
   switch (action.type) {
     case GET_PRODUCTS_COMPLETE:
-      return [...action.products];
+      return {
+        ...state,
+        products: action.products,
+      };
     case GET_PRODUCTS_ERROR:
       return {
+        ...state,
         errorMessage: action.message,
       };
     case ADD_PRODUCTS_COMPLETE:
-      return [...state, action.payload];
+      return {
+        ...state,
+        products: [...state.products, action.payload],
+      };
     case ADD_PRODUCTS_ERROR:
       return {
+        ...state,
         errorMessage: action.message,
       };
     default:
