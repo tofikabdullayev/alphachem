@@ -16,6 +16,7 @@ interface AddItemProps {
   isOpen: boolean;
   openModal: () => void;
   closeModal: () => void;
+  isFormValid?: boolean;
 }
 
 const AddItem: React.FC<AddItemProps> = ({
@@ -25,6 +26,7 @@ const AddItem: React.FC<AddItemProps> = ({
   isOpen,
   openModal,
   closeModal,
+  isFormValid,
 }) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -56,7 +58,12 @@ const AddItem: React.FC<AddItemProps> = ({
           <Button autoFocus onClick={closeModal} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
+          <Button
+            onClick={handleClose}
+            color="primary"
+            autoFocus
+            disabled={!isFormValid}
+          >
             Add
           </Button>
         </DialogActions>

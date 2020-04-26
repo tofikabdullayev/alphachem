@@ -16,31 +16,46 @@ export interface ProductsProps {}
 
 const headRows = ['Image', '[AZ] Title', '[EN] Title', '[RU] Title'];
 
+interface ItemTitle {
+  value: string;
+  touched?: boolean;
+  isValid: () => boolean;
+}
+
+const initialitemTitle: ItemTitle = {
+  value: '',
+  touched: false,
+  isValid() {
+    return false;
+  },
+};
+
 const ProductsPage: React.FC<ProductsProps> = () => {
   const dispatch = useDispatch();
   const products = useSelector(
     (state: { productsPage: ProductsPageState }) => state.productsPage.products
   );
   const classes = useStyles();
-  const [azTitle, setAzTitle] = useState<string>('');
-  const [enTitle, setEnTitle] = useState<string>('');
-  const [ruTitle, setRuTitle] = useState<string>('');
+
+  const [azTitle, setAzTitle] = useState<ItemTitle>(initialitemTitle);
+  const [enTitle, setEnTitle] = useState<ItemTitle>(initialitemTitle);
+  const [ruTitle, setRuTitle] = useState<ItemTitle>(initialitemTitle);
   const productImage: React.RefObject<any> = React.createRef();
   const onSubmit = async (stopLoading: () => void) => {
     const newProduct: Product = {
       title: {
-        az: azTitle,
-        en: enTitle,
-        ru: ruTitle,
+        az: azTitle.value,
+        en: enTitle.value,
+        ru: ruTitle.value,
       },
       imageSrc: '/products/vaseline.jpg',
     };
     await dispatch(addProduct(newProduct));
     setOpen(false);
     stopLoading();
-    setAzTitle('');
-    setEnTitle('');
-    setRuTitle('');
+    setAzTitle(initialitemTitle);
+    setEnTitle(initialitemTitle);
+    setRuTitle(initialitemTitle);
   };
 
   const [open, setOpen] = useState(false);
@@ -51,6 +66,21 @@ const ProductsPage: React.FC<ProductsProps> = () => {
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
+
+  const titleChangehandler = (
+    value: string,
+    setter: (newData: ItemTitle) => void
+  ) => {
+    const currentState: ItemTitle = {
+      value: value,
+      touched: true,
+      isValid() {
+        return value.length > 0;
+      },
+    };
+
+    setter(currentState);
+  };
 
   return (
     <Layout>
@@ -70,25 +100,34 @@ const ProductsPage: React.FC<ProductsProps> = () => {
           isOpen={open}
           openModal={openModal}
           closeModal={() => setOpen(false)}
+          isFormValid={
+            azTitle.isValid() && enTitle.isValid() && ruTitle.isValid()
+          }
         >
           <form className={classes.root}>
             <TextField
               label="Product title [AZ]"
-              value={azTitle}
+              value={azTitle.value}
               fullWidth
-              onChange={(e) => setAzTitle(e.target.value)}
+              onChange={(e) => titleChangehandler(e.target.value, setAzTitle)}
+              error={!azTitle.isValid() && azTitle.touched}
+              required
             />
             <TextField
               label="Product title [EN]"
               fullWidth
-              value={enTitle}
-              onChange={(e) => setEnTitle(e.target.value)}
+              value={enTitle.value}
+              onChange={(e) => titleChangehandler(e.target.value, setEnTitle)}
+              error={!enTitle.isValid() && enTitle.touched}
+              required
             />
             <TextField
               label="Product title [RU]"
               fullWidth
-              value={ruTitle}
-              onChange={(e) => setRuTitle(e.target.value)}
+              value={ruTitle.value}
+              onChange={(e) => titleChangehandler(e.target.value, setRuTitle)}
+              error={!ruTitle.isValid() && ruTitle.touched}
+              required
             />
             <Input placeholder="Product image" type="file" ref={productImage} />
           </form>
