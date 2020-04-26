@@ -17,7 +17,7 @@ export function getProducts() {
     if (response.status < 400) {
       dispatch(getProductsSucces(response.data));
     } else {
-      dispatch(getProductsError());
+      dispatch(getProductsError(response.data));
     }
   };
 }
@@ -26,13 +26,13 @@ export function addProduct(product: Product) {
   return async (
     dispatch: (actionCreator: { type: string; products?: Product[] }) => void
   ) => {
-    dispatch({ type: ADD_PRODUCTS });
-    const response = await Axios.post('/api/products', product);
+    try {
+      dispatch({ type: ADD_PRODUCTS });
+      const response = await Axios.post('/api/products', product);
 
-    if (response.status < 400) {
       dispatch(addProductsSucces(response.data));
-    } else {
-      dispatch(addProductsError());
+    } catch (error) {
+      dispatch(addProductsError(error.response.data.message));
     }
   };
 }
@@ -44,9 +44,10 @@ export function getProductsSucces(products: Product[]) {
   };
 }
 
-export function getProductsError() {
+export function getProductsError(error: string) {
   return {
     type: GET_PRODUCTS_ERROR,
+    message: error,
   };
 }
 
@@ -57,8 +58,9 @@ export function addProductsSucces(product: Product) {
   };
 }
 
-export function addProductsError() {
+export function addProductsError(error: string) {
   return {
     type: ADD_PRODUCTS_ERROR,
+    message: error,
   };
 }
