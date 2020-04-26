@@ -6,12 +6,18 @@ import {
   ADD_PRODUCTS_COMPLETE,
   ADD_PRODUCTS_ERROR,
   ADD_PRODUCTS,
+  DELETE_PRODUCTS_COMPLETE,
+  DELETE_PRODUCTS_ERROR,
 } from './actionTypes';
 
+interface ActionCreator {
+  type: string;
+  products?: Product[];
+  id?: string;
+}
+
 export function getProducts() {
-  return async (
-    dispatch: (actionCreator: { type: string; products?: Product[] }) => void
-  ) => {
+  return async (dispatch: (actionCreator: ActionCreator) => void) => {
     try {
       const response = await Axios.get('/api/products');
 
@@ -27,9 +33,7 @@ export function getProducts() {
 }
 
 export function addProduct(product: Product) {
-  return async (
-    dispatch: (actionCreator: { type: string; products?: Product[] }) => void
-  ) => {
+  return async (dispatch: (actionCreator: ActionCreator) => void) => {
     try {
       dispatch({ type: ADD_PRODUCTS });
       const response = await Axios.post('/api/products', product);
@@ -41,6 +45,35 @@ export function addProduct(product: Product) {
     } catch (error) {
       dispatch(addProductsError(error.response.data.message));
     }
+  };
+}
+
+export function deleteProduct(id: string) {
+  return async (dispatch: (actionCreator: ActionCreator) => void) => {
+    try {
+      const response = await Axios.delete(`/api/products/${id}`);
+      if (response.status < 400) {
+        dispatch(deleteProductSuccess(id));
+      } else {
+        dispatch(deleteProductError(response.data));
+      }
+    } catch (error) {
+      dispatch(deleteProductError(error.response.data.message));
+    }
+  };
+}
+
+export function deleteProductSuccess(id: string) {
+  return {
+    type: DELETE_PRODUCTS_COMPLETE,
+    deleteId: id,
+  };
+}
+
+export function deleteProductError(error: string) {
+  return {
+    type: DELETE_PRODUCTS_ERROR,
+    message: error,
   };
 }
 

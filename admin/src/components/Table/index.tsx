@@ -15,9 +15,14 @@ import { Product } from './../../store/interfaces';
 export interface DataTableProps {
   data: Product[];
   tableHeader: string[];
+  onDelete: (id: string) => void;
 }
 
-const DataTable: React.FC<DataTableProps> = ({ data, tableHeader }) => {
+const DataTable: React.FC<DataTableProps> = ({
+  data,
+  tableHeader,
+  onDelete,
+}) => {
   const classes = useStyles();
   return (
     <TableContainer component={Paper} className={classes.tableContainer}>
@@ -47,7 +52,11 @@ const DataTable: React.FC<DataTableProps> = ({ data, tableHeader }) => {
                 <IconButton color="primary" aria-label="Edit">
                   <EditIcon />
                 </IconButton>
-                <IconButton color="primary" aria-label="Delete">
+                <IconButton
+                  color="primary"
+                  aria-label="Delete"
+                  onClick={() => onDelete(row._id as string)}
+                >
                   <DeleteIcon />
                 </IconButton>
               </TableCell>

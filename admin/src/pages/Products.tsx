@@ -8,7 +8,11 @@ import DataTable from '../components/Table';
 import Loading from '../components/loading';
 import useStyles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts, addProduct } from './../store/actions/products';
+import {
+  getProducts,
+  addProduct,
+  deleteProduct,
+} from './../store/actions/products';
 import { Product } from '../store/interfaces';
 import { ProductsPageState } from '../store/reducers/products';
 
@@ -82,6 +86,10 @@ const ProductsPage: React.FC<ProductsProps> = () => {
     setter(currentState);
   };
 
+  const onDelete = (id: string) => {
+    dispatch(deleteProduct(id));
+  };
+
   return (
     <Layout>
       <div
@@ -134,7 +142,7 @@ const ProductsPage: React.FC<ProductsProps> = () => {
         </AddItem>
       </div>
       {products && products.length > 0 ? (
-        <DataTable data={products} tableHeader={headRows} />
+        <DataTable data={products} tableHeader={headRows} onDelete={onDelete} />
       ) : (
         <Loading />
       )}
