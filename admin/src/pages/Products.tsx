@@ -112,7 +112,7 @@ const ProductsPage: React.FC<ProductsProps> = () => {
             azTitle.isValid() && enTitle.isValid() && ruTitle.isValid()
           }
         >
-          <form className={classes.root}>
+          <form className={classes.formRoot}>
             <TextField
               label="Product title [AZ]"
               value={azTitle.value}
