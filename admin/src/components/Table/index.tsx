@@ -11,10 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Product } from './../../store/interfaces';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import Button from '@material-ui/core/Button';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import { DeleteDialog, DeleteDialogData } from '../Dialogs';
 
 export interface DataTableProps {
   data: Product[];
@@ -22,64 +19,38 @@ export interface DataTableProps {
   onDelete: (id: string, callBack: () => void) => void;
 }
 
-interface DeleteDialog {
-  isOpen: boolean;
-  title: string;
-  id?: string;
-}
-
-const initialDeleteDialogState: DeleteDialog = {
-  isOpen: false,
-  title: '',
-};
-
 const DataTable: React.FC<DataTableProps> = ({
   data,
   tableHeader,
   onDelete,
 }) => {
   const classes = useStyles();
-  const [dialog, setdialog] = useState<DeleteDialog>(initialDeleteDialogState);
+  const [dialog, setdialog] = useState<DeleteDialogData>(
+    {} as DeleteDialogData
+  );
 
   const handleDelete = (item: Product) => {
-    const dialogData = {
+    const dialogData: DeleteDialogData = {
       isOpen: true,
       title: `Are you sure you want to delete '${item.title.az}'?`,
-      id: item._id,
+      id: item._id as string,
     };
     setdialog(dialogData);
   };
 
   return (
     <>
-      <Dialog
-        open={dialog.isOpen}
-        onClose={() => setdialog({ isOpen: false, title: '' })}
-        aria-labelledby="responsive-dialog-title"
-      >
-        <DialogTitle id="responsive-dialog-title">{dialog.title}</DialogTitle>
-        <DialogActions>
-          <Button
-            autoFocus
-            onClick={() => setdialog({ isOpen: false, title: '' })}
-            color="primary"
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={() => {
-              console.log(dialog.id);
-              onDelete(dialog.id as string, () =>
-                setdialog(initialDeleteDialogState)
-              );
-            }}
-            color="primary"
-            autoFocus
-          >
-            Delete
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <DeleteDialog
+        onDelete={() => {
+          onDelete(dialog?.id as string, () =>
+            setdialog({} as DeleteDialogData)
+          );
+        }}
+        isOpen={dialog?.isOpen as boolean}
+        title={dialog?.title as string}
+        id={dialog.id as string}
+        close={() => setdialog({} as DeleteDialogData)}
+      />
 
       <TableContainer component={Paper} className={classes.tableContainer}>
         <Table className={classes.table} aria-label="data table" stickyHeader>
