@@ -86,8 +86,9 @@ const ProductsPage: React.FC<ProductsProps> = () => {
     setter(currentState);
   };
 
-  const onDelete = (id: string) => {
-    dispatch(deleteProduct(id));
+  const onDelete = async (id: string, callBack: () => void) => {
+    await dispatch(deleteProduct(id));
+    callBack();
   };
 
   return (

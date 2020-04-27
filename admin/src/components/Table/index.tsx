@@ -19,7 +19,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 export interface DataTableProps {
   data: Product[];
   tableHeader: string[];
-  onDelete: (id: string) => void;
+  onDelete: (id: string, callBack: () => void) => void;
 }
 
 interface DeleteDialog {
@@ -44,7 +44,7 @@ const DataTable: React.FC<DataTableProps> = ({
   const handleDelete = (item: Product) => {
     const dialogData = {
       isOpen: true,
-      title: `Are you sure you want to delete ${item.title.az}`,
+      title: `Are you sure you want to delete '${item.title.az}'?`,
       id: item._id,
     };
     setdialog(dialogData);
@@ -69,8 +69,9 @@ const DataTable: React.FC<DataTableProps> = ({
           <Button
             onClick={() => {
               console.log(dialog.id);
-              onDelete(dialog.id as string);
-              setdialog(initialDeleteDialogState);
+              onDelete(dialog.id as string, () =>
+                setdialog(initialDeleteDialogState)
+              );
             }}
             color="primary"
             autoFocus
