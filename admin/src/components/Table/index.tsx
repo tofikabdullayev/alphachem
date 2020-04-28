@@ -42,9 +42,9 @@ const DataTable: React.FC<DataTableProps> = ({
     <>
       <DeleteDialog
         onDelete={() => {
-          onDelete(dialog?.id as string, () =>
-            setdialog({} as DeleteDialogData)
-          );
+          onDelete(dialog?.id as string, () => {
+            setdialog({} as DeleteDialogData);
+          });
         }}
         isOpen={dialog?.isOpen as boolean}
         title={dialog?.title as string}

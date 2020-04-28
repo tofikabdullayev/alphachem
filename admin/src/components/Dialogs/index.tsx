@@ -15,7 +15,7 @@ export interface DeleteDialogData {
 }
 
 export interface DeleteDialogProps extends DeleteDialogData {
-  onDelete: (id: string, callBack: () => void) => void;
+  onDelete: (id: string) => void;
   close: () => void;
 }
 
@@ -33,17 +33,12 @@ export const DeleteDialog: React.FC<DeleteDialogProps> = ({
       aria-labelledby="responsive-dialog-title"
     >
       <DialogTitle id="responsive-dialog-title">{title}</DialogTitle>
+
       <DialogActions>
         <Button autoFocus onClick={() => close()} color="primary">
           Cancel
         </Button>
-        <Button
-          onClick={() => {
-            onDelete(id, () => close());
-          }}
-          color="primary"
-          autoFocus
-        >
+        <Button onClick={() => onDelete(id)} color="primary" autoFocus>
           Delete
         </Button>
       </DialogActions>
@@ -91,7 +86,10 @@ export const ItemDialog: React.FC<ItemDialogProps> = ({
           Cancel
         </Button>
         <Button
-          onClick={() => submitHandler(() => setLoading(false))}
+          onClick={() => {
+            setLoading(true);
+            submitHandler(() => setLoading(false));
+          }}
           color="primary"
           autoFocus
           disabled={!isFormValid}

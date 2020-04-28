@@ -41,7 +41,26 @@ const ProductsPage: React.FC<ProductsProps> = () => {
   const products = useSelector(
     (state: { productsPage: ProductsPageState }) => state.productsPage.products
   );
+  const classes = useStyles();
 
+  const [azTitle, setAzTitle] = useState<ItemTitle>(initialitemTitle);
+  const [enTitle, setEnTitle] = useState<ItemTitle>(initialitemTitle);
+  const [ruTitle, setRuTitle] = useState<ItemTitle>(initialitemTitle);
+  const productImage: React.RefObject<any> = React.createRef();
+  const titleChangehandler = (
+    value: string,
+    setter: (newData: ItemTitle) => void
+  ) => {
+    const currentState: ItemTitle = {
+      value: value,
+      touched: true,
+      isValid() {
+        return value.length > 0;
+      },
+    };
+
+    setter(currentState);
+  };
   const onSubmit = async (stopLoading: () => void) => {
     const newProduct: Product = {
       title: {
@@ -105,61 +124,35 @@ const ProductsPage: React.FC<ProductsProps> = () => {
         }
         submitButtontext="Add"
       >
-        <ProductForm />
+        <form className={classes.formRoot}>
+          <TextField
+            label="Product title [AZ]"
+            value={azTitle.value}
+            fullWidth
+            onChange={(e) => titleChangehandler(e.target.value, setAzTitle)}
+            error={!azTitle.isValid() && azTitle.touched}
+            required
+          />
+          <TextField
+            label="Product title [EN]"
+            fullWidth
+            value={enTitle.value}
+            onChange={(e) => titleChangehandler(e.target.value, setEnTitle)}
+            error={!enTitle.isValid() && enTitle.touched}
+            required
+          />
+          <TextField
+            label="Product title [RU]"
+            fullWidth
+            value={ruTitle.value}
+            onChange={(e) => titleChangehandler(e.target.value, setRuTitle)}
+            error={!ruTitle.isValid() && ruTitle.touched}
+            required
+          />
+          <Input placeholder="Product image" type="file" ref={productImage} />
+        </form>
       </ItemDialog>
     </Layout>
-  );
-};
-
-const ProductForm: React.FC = () => {
-  const classes = useStyles();
-
-  const [azTitle, setAzTitle] = useState<ItemTitle>(initialitemTitle);
-  const [enTitle, setEnTitle] = useState<ItemTitle>(initialitemTitle);
-  const [ruTitle, setRuTitle] = useState<ItemTitle>(initialitemTitle);
-  const productImage: React.RefObject<any> = React.createRef();
-  const titleChangehandler = (
-    value: string,
-    setter: (newData: ItemTitle) => void
-  ) => {
-    const currentState: ItemTitle = {
-      value: value,
-      touched: true,
-      isValid() {
-        return value.length > 0;
-      },
-    };
-
-    setter(currentState);
-  };
-  return (
-    <form className={classes.formRoot}>
-      <TextField
-        label="Product title [AZ]"
-        value={azTitle.value}
-        fullWidth
-        onChange={(e) => titleChangehandler(e.target.value, setAzTitle)}
-        error={!azTitle.isValid() && azTitle.touched}
-        required
-      />
-      <TextField
-        label="Product title [EN]"
-        fullWidth
-        value={enTitle.value}
-        onChange={(e) => titleChangehandler(e.target.value, setEnTitle)}
-        error={!enTitle.isValid() && enTitle.touched}
-        required
-      />
-      <TextField
-        label="Product title [RU]"
-        fullWidth
-        value={ruTitle.value}
-        onChange={(e) => titleChangehandler(e.target.value, setRuTitle)}
-        error={!ruTitle.isValid() && ruTitle.touched}
-        required
-      />
-      <Input placeholder="Product image" type="file" ref={productImage} />
-    </form>
   );
 };
 
