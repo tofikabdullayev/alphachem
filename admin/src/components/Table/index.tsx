@@ -17,12 +17,14 @@ export interface DataTableProps {
   data: Product[];
   tableHeader: string[];
   onDelete: (id: string, callBack: () => void) => void;
+  onEdit: (product: Product) => void;
 }
 
 const DataTable: React.FC<DataTableProps> = ({
   data,
   tableHeader,
   onDelete,
+  onEdit,
 }) => {
   const classes = useStyles();
   const [dialog, setdialog] = useState<DeleteDialogData>(
@@ -56,33 +58,37 @@ const DataTable: React.FC<DataTableProps> = ({
         <Table className={classes.table} aria-label="data table" stickyHeader>
           <TableHead>
             <TableRow>
-              {tableHeader.map((row, i) => (
-                <TableCell key={i}>{row}</TableCell>
+              {tableHeader.map((tableHeaderitem, i) => (
+                <TableCell key={i}>{tableHeaderitem}</TableCell>
               ))}
               <TableCell align="right"></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((row) => (
-              <TableRow key={row._id}>
+            {data.map((product) => (
+              <TableRow key={product._id}>
                 <TableCell component="th" scope="row">
                   <img
-                    src={row.imageSrc}
-                    alt={row.title.az}
+                    src={product.imageSrc}
+                    alt={product.title.az}
                     className={classes.image}
                   />
                 </TableCell>
-                <TableCell>{row.title.az}</TableCell>
-                <TableCell>{row.title.en}</TableCell>
-                <TableCell>{row.title.ru}</TableCell>
+                <TableCell>{product.title.az}</TableCell>
+                <TableCell>{product.title.en}</TableCell>
+                <TableCell>{product.title.ru}</TableCell>
                 <TableCell align="right">
-                  <IconButton color="primary" aria-label="Edit">
+                  <IconButton
+                    color="primary"
+                    aria-label="Edit"
+                    onClick={() => onEdit(product)}
+                  >
                     <EditIcon />
                   </IconButton>
                   <IconButton
                     color="primary"
                     aria-label="Delete"
-                    onClick={() => handleDelete(row)}
+                    onClick={() => handleDelete(product)}
                   >
                     <DeleteIcon />
                   </IconButton>

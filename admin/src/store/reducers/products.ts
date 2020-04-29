@@ -5,6 +5,8 @@ import {
   ADD_PRODUCTS_ERROR,
   DELETE_PRODUCTS_COMPLETE,
   DELETE_PRODUCTS_ERROR,
+  UPDATE_PRODUCTS_COMPLETE,
+  UPDATE_PRODUCTS_ERROR,
 } from '../actions/actionTypes';
 import { Product } from '../interfaces';
 
@@ -22,8 +24,8 @@ export default function productsReducer(
   action: {
     type: string;
     products: Product[];
-    payload?: any;
-    message?: string;
+    product: Product;
+    error?: any;
     deleteId?: string;
   }
 ) {
@@ -36,17 +38,30 @@ export default function productsReducer(
     case GET_PRODUCTS_ERROR:
       return {
         ...state,
-        errorMessage: action.message,
+        errorMessage: action.error,
       };
     case ADD_PRODUCTS_COMPLETE:
       return {
         ...state,
-        products: [...state.products, action.payload],
+        products: [...state.products, action.product],
       };
     case ADD_PRODUCTS_ERROR:
       return {
         ...state,
-        errorMessage: action.message,
+        errorMessage: action.error,
+      };
+    case UPDATE_PRODUCTS_COMPLETE:
+      return {
+        ...state,
+        products: [
+          ...state.products.filter((el) => el._id !== action.product._id),
+          action.product,
+        ],
+      };
+    case UPDATE_PRODUCTS_ERROR:
+      return {
+        ...state,
+        errorMessage: action.error,
       };
     case DELETE_PRODUCTS_COMPLETE:
       return {
@@ -56,7 +71,7 @@ export default function productsReducer(
     case DELETE_PRODUCTS_ERROR:
       return {
         ...state,
-        errorMessage: action.message,
+        errorMessage: action.error,
       };
     default:
       return state;

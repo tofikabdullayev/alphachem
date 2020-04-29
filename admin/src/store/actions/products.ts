@@ -10,13 +10,16 @@ import {
   DELETE_PRODUCTS_ERROR,
   GET_PRODUCTS,
   DELETE_PRODUCTS,
+  UPDATE_PRODUCTS_COMPLETE,
+  UPDATE_PRODUCTS,
+  UPDATE_PRODUCTS_ERROR,
 } from './actionTypes';
 
 interface ActionCreator {
   type: string;
   products?: Product[];
   id?: string;
-  message?: string;
+  error?: any;
 }
 
 export function getProducts() {
@@ -31,7 +34,8 @@ export function getProducts() {
         dispatch(errorAction(GET_PRODUCTS_ERROR, response.data));
       }
     } catch (error) {
-      dispatch(errorAction(GET_PRODUCTS_ERROR, error.response.data.message));
+      console.trace(error);
+      dispatch(errorAction(GET_PRODUCTS_ERROR, error));
     }
   };
 }
@@ -47,7 +51,25 @@ export function addProduct(product: Product) {
         dispatch(errorAction(ADD_PRODUCTS_ERROR, response.data));
       }
     } catch (error) {
-      dispatch(errorAction(ADD_PRODUCTS_ERROR, error.response.data.message));
+      console.trace(error);
+      dispatch(errorAction(ADD_PRODUCTS_ERROR, error));
+    }
+  };
+}
+
+export function editProduct(product: Product, id: string) {
+  return async (dispatch: (actionCreator: ActionCreator) => void) => {
+    try {
+      dispatch({ type: UPDATE_PRODUCTS });
+      const response = await Axios.put(`/api/products/${id}`, product);
+      if (response.status < 400) {
+        dispatch(editProductsSucces(response.data));
+      } else {
+        dispatch(errorAction(UPDATE_PRODUCTS_ERROR, response.data));
+      }
+    } catch (error) {
+      console.trace(error);
+      dispatch(errorAction(UPDATE_PRODUCTS_ERROR, error));
     }
   };
 }
@@ -63,7 +85,8 @@ export function deleteProduct(id: string) {
         dispatch(errorAction(DELETE_PRODUCTS_ERROR, response.data));
       }
     } catch (error) {
-      dispatch(errorAction(DELETE_PRODUCTS_ERROR, error.response.data.message));
+      console.trace(error);
+      dispatch(errorAction(DELETE_PRODUCTS_ERROR, error));
     }
   };
 }
@@ -71,7 +94,14 @@ export function deleteProduct(id: string) {
 export function addProductsSucces(product: Product) {
   return {
     type: ADD_PRODUCTS_COMPLETE,
-    payload: product,
+    product,
+  };
+}
+
+export function editProductsSucces(product: Product) {
+  return {
+    type: UPDATE_PRODUCTS_COMPLETE,
+    product,
   };
 }
 
@@ -89,6 +119,6 @@ export function deleteProductSuccess(id: string) {
   };
 }
 
-export function errorAction(type: string, message: string): ActionCreator {
-  return { type, message };
+export function errorAction(type: string, error: any): ActionCreator {
+  return { type, error };
 }

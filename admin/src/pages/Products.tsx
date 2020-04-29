@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   getProducts,
   addProduct,
+  editProduct,
   deleteProduct,
 } from './../store/actions/products';
 import { Product } from '../store/interfaces';
@@ -25,15 +26,13 @@ const headRows = ['Image', '[AZ] Title', '[EN] Title', '[RU] Title'];
 interface ItemTitle {
   value: string;
   touched?: boolean;
-  isValid: () => boolean;
+  isValid: boolean;
 }
 
 const initialitemTitle: ItemTitle = {
   value: '',
   touched: false,
-  isValid() {
-    return false;
-  },
+  isValid: false,
 };
 
 const ProductsPage: React.FC<ProductsProps> = () => {
@@ -46,6 +45,7 @@ const ProductsPage: React.FC<ProductsProps> = () => {
   const [azTitle, setAzTitle] = useState<ItemTitle>(initialitemTitle);
   const [enTitle, setEnTitle] = useState<ItemTitle>(initialitemTitle);
   const [ruTitle, setRuTitle] = useState<ItemTitle>(initialitemTitle);
+  const [editId, setEditId] = useState<string>('');
   const productImage: React.RefObject<any> = React.createRef();
   const titleChangehandler = (
     value: string,
@@ -54,14 +54,12 @@ const ProductsPage: React.FC<ProductsProps> = () => {
     const currentState: ItemTitle = {
       value: value,
       touched: true,
-      isValid() {
-        return value.length > 0;
-      },
+      isValid: value.length > 0,
     };
 
     setter(currentState);
   };
-  const onSubmit = async (stopLoading: () => void) => {
+  const onAddSubmit = async (stopLoading: () => void) => {
     const newProduct: Product = {
       title: {
         az: azTitle.value,
@@ -71,16 +69,34 @@ const ProductsPage: React.FC<ProductsProps> = () => {
       imageSrc: '/products/vaseline.jpg',
     };
     await dispatch(addProduct(newProduct));
-    setOpen(false);
+    setOpenAddModal(false);
     stopLoading();
     setAzTitle(initialitemTitle);
     setEnTitle(initialitemTitle);
     setRuTitle(initialitemTitle);
   };
 
-  const [open, setOpen] = useState(false);
-  const openModal = () => {
-    setOpen(true);
+  const onEditSubmit = async (stopLoading: () => void) => {
+    const editedProduct: Product = {
+      title: {
+        az: azTitle.value,
+        en: enTitle.value,
+        ru: ruTitle.value,
+      },
+      imageSrc: '/products/vaseline.jpg',
+    };
+    await dispatch(editProduct(editedProduct, editId));
+    setOpenEditModal(false);
+    stopLoading();
+    setAzTitle(initialitemTitle);
+    setEnTitle(initialitemTitle);
+    setRuTitle(initialitemTitle);
+  };
+
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const openAddModalAddModal = () => {
+    setOpenAddModal(true);
   };
 
   useEffect(() => {
@@ -91,6 +107,44 @@ const ProductsPage: React.FC<ProductsProps> = () => {
     await dispatch(deleteProduct(id));
     callBack();
   };
+
+  const onEdit = (product: Product): void => {
+    titleChangehandler(product.title.az, setAzTitle);
+    titleChangehandler(product.title.en, setEnTitle);
+    titleChangehandler(product.title.ru, setRuTitle);
+    setEditId(product._id as string);
+    setOpenEditModal(true);
+  };
+
+  const Form = (
+    <form className={classes.formRoot}>
+      <TextField
+        label="Product title [AZ]"
+        value={azTitle.value}
+        fullWidth
+        onChange={(e) => titleChangehandler(e.target.value, setAzTitle)}
+        error={!azTitle.isValid && azTitle.touched}
+        required
+      />
+      <TextField
+        label="Product title [EN]"
+        fullWidth
+        value={enTitle.value}
+        onChange={(e) => titleChangehandler(e.target.value, setEnTitle)}
+        error={!enTitle.isValid && enTitle.touched}
+        required
+      />
+      <TextField
+        label="Product title [RU]"
+        fullWidth
+        value={ruTitle.value}
+        onChange={(e) => titleChangehandler(e.target.value, setRuTitle)}
+        error={!ruTitle.isValid && ruTitle.touched}
+        required
+      />
+      <Input placeholder="Product image" type="file" ref={productImage} />
+    </form>
+  );
 
   return (
     <Layout>
@@ -104,53 +158,55 @@ const ProductsPage: React.FC<ProductsProps> = () => {
         <Typography variant="h3" component="h3">
           Products
         </Typography>
-        <Button variant="outlined" color="primary" onClick={openModal}>
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={openAddModalAddModal}
+        >
           <AddIcon />
         </Button>
       </div>
       {products && products.length > 0 ? (
-        <DataTable data={products} tableHeader={headRows} onDelete={onDelete} />
+        <DataTable
+          data={products}
+          tableHeader={headRows}
+          onDelete={onDelete}
+          onEdit={onEdit}
+        />
       ) : (
         <Loading />
       )}
 
       <ItemDialog
         title="Add product"
-        submitHandler={onSubmit}
-        isOpen={open}
-        closeModal={() => setOpen(false)}
-        isFormValid={
-          azTitle.isValid() && enTitle.isValid() && ruTitle.isValid()
-        }
+        submitHandler={onAddSubmit}
+        isOpen={openAddModal}
+        closeModal={() => {
+          setAzTitle(initialitemTitle);
+          setEnTitle(initialitemTitle);
+          setRuTitle(initialitemTitle);
+          setOpenAddModal(false);
+        }}
+        isFormValid={azTitle.isValid && enTitle.isValid && ruTitle.isValid}
         submitButtontext="Add"
       >
-        <form className={classes.formRoot}>
-          <TextField
-            label="Product title [AZ]"
-            value={azTitle.value}
-            fullWidth
-            onChange={(e) => titleChangehandler(e.target.value, setAzTitle)}
-            error={!azTitle.isValid() && azTitle.touched}
-            required
-          />
-          <TextField
-            label="Product title [EN]"
-            fullWidth
-            value={enTitle.value}
-            onChange={(e) => titleChangehandler(e.target.value, setEnTitle)}
-            error={!enTitle.isValid() && enTitle.touched}
-            required
-          />
-          <TextField
-            label="Product title [RU]"
-            fullWidth
-            value={ruTitle.value}
-            onChange={(e) => titleChangehandler(e.target.value, setRuTitle)}
-            error={!ruTitle.isValid() && ruTitle.touched}
-            required
-          />
-          <Input placeholder="Product image" type="file" ref={productImage} />
-        </form>
+        {Form}
+      </ItemDialog>
+
+      <ItemDialog
+        title="Edit product"
+        submitHandler={onEditSubmit}
+        isOpen={openEditModal}
+        closeModal={() => {
+          setAzTitle(initialitemTitle);
+          setEnTitle(initialitemTitle);
+          setRuTitle(initialitemTitle);
+          setOpenEditModal(false);
+        }}
+        isFormValid={azTitle.isValid && enTitle.isValid && ruTitle.isValid}
+        submitButtontext="Edit"
+      >
+        {Form}
       </ItemDialog>
     </Layout>
   );

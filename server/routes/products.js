@@ -39,7 +39,7 @@ router.put('/:id', async (req, res) => {
         .json({ message: 'Cannot find selected products info' });
     }
     await Products.findOneAndUpdate({ _id: req.params.id }, products);
-    res.status(201).json(products);
+    res.status(201).json({ ...products, _id: req.params.id });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
