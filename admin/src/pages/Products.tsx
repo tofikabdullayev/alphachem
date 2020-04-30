@@ -95,9 +95,6 @@ const ProductsPage: React.FC<ProductsProps> = () => {
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
-  const openAddModalAddModal = () => {
-    setOpenAddModal(true);
-  };
 
   useEffect(() => {
     dispatch(getProducts());
@@ -148,20 +145,14 @@ const ProductsPage: React.FC<ProductsProps> = () => {
 
   return (
     <Layout>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
+      <div className={classes.pageTitle}>
         <Typography variant="h3" component="h3">
           Products
         </Typography>
         <Button
           variant="outlined"
           color="primary"
-          onClick={openAddModalAddModal}
+          onClick={() => setOpenAddModal(true)}
         >
           <AddIcon />
         </Button>
