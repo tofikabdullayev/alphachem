@@ -1,10 +1,12 @@
-export interface Product {
+interface Item {
   title: Lang;
   _id?: string;
   imageSrc: string;
 }
 
-export interface Slider extends Product {
+export interface Product extends Item {}
+
+export interface Slider extends Item {
   description: Lang;
 }
 
