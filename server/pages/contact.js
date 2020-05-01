@@ -65,11 +65,11 @@ const ContactPage = ({ t, contactData }) => (
                             width="100%"
                             height="500"
                             id="gmap_canvas"
-                            src="https://maps.google.com/maps?ll=40.3834610547961%2C49.89322600000003&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                            src="https://maps.google.com/maps?ll=40.4736823,49.9491262&t=&z=14&ie=UTF8&iwloc=&output=embed"
                             frameBorder="0"
                             scrolling="no"
-                            marginheight="0"
-                            marginwidth="0"
+                            marginHeight="0"
+                            marginWidth="0"
                           ></iframe>
                         </div>
                       </div>

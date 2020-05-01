@@ -8,12 +8,16 @@ content-type: application/json
         "ru": "[RU]349 Main St, Deseronto, ON K0K 1X0, Canada"
     },
     "phones": ["+00 123 456 789 00", "+ 00 254 632 548 00"],
-    "emails": ["support@alphachem.com", "help.alphachem@gmail.com"]
+    "emails": ["support@alphachem.com", "help.alphachem@gmail.com"],
+    "location": {
+      "lat": "40.4736823",
+      "long":"49.9491262"
+    }
 }
 
 ###
 
-PUT http://localhost:3000/api/contact/ HTTP/1.1
+PUT http://localhost:5000/api/contact/ HTTP/1.1
 content-type: application/json
 
 {
@@ -23,7 +27,11 @@ content-type: application/json
         "ru": "[RU]349 Main St, Deseronto, ON K0K 1X0, Canada"
     },
     "phones": ["+00 123 456 789ssss1q123 00", "+ 00 254 632 548 00"],
-    "emails": ["support@alphachem.com", "help.alphachem@gmail.com"]
+    "emails": ["support@alphachem.com", "help.alphachem@gmail.com"],
+    "location": {
+      "lat": "40.4736823",
+      "long":"49.9491262"
+    }
 }
 
 ###

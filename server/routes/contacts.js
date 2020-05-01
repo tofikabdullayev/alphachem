@@ -21,6 +21,10 @@ router.post('/', async (req, res) => {
     },
     phones: req.body.phones,
     emails: req.body.emails,
+    location: {
+      lat: req.body.location.lat,
+      long: req.bpdy.location.long,
+    },
   });
   try {
     const newContacts = await contacts.save();
@@ -40,6 +44,10 @@ router.put('/', async (req, res) => {
     },
     phones: req.body.phones,
     emails: req.body.emails,
+    location: {
+      lat: req.body.location.lat,
+      long: req.body.location.long,
+    },
   };
   try {
     const newContacts = await Contacts.findOneAndUpdate(
