@@ -14,6 +14,9 @@ export default makeStyles((theme: Theme) =>
     },
     pageContent: {
       marginTop: '17px',
+      height: 'calc(100vh - 147px)',
+      overflow: 'hidden',
+      overflowY: 'visible',
     },
     fieldsTitle: { marginTop: '17px' },
     fullTextFields: {

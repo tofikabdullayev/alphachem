@@ -23,13 +23,13 @@ export interface ProductsProps {}
 
 const headRows = ['Image', '[AZ] Title', '[EN] Title', '[RU] Title'];
 
-interface ItemTitle {
+export interface ItemTitle {
   value: string;
   touched?: boolean;
   isValid: boolean;
 }
 
-const initialitemTitle: ItemTitle = {
+export const initialitemTitle: ItemTitle = {
   value: '',
   touched: false,
   isValid: false,
