@@ -10,6 +10,13 @@ export interface Slider extends Item {
   description: Lang;
 }
 
+export interface Contacts {
+  adress: Lang;
+  phones: string[];
+  emails: string[];
+  _id?: string;
+}
+
 interface Lang {
   az: string;
   en: string;

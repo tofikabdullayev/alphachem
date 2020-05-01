@@ -10,11 +10,11 @@ import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { Product, Slider } from './../../store/interfaces';
+import { Product } from './../../store/interfaces';
 import { DeleteDialog, DeleteDialogData } from '../Dialogs';
 
 export interface DataTableProps {
-  data: Product[] | Slider[];
+  data: Product[];
   tableHeader: string[];
   onDelete: (id: string, callBack: () => void) => void;
   onEdit: (product: Product) => void;

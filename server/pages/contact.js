@@ -59,14 +59,14 @@ const ContactPage = ({ t, contactData }) => (
                       </div>
                     </div>
                     <div className="col-md-6">
-                      <div class="mapouter">
-                        <div class="gmap_canvas">
+                      <div className="mapouter">
+                        <div className="gmap_canvas">
                           <iframe
                             width="100%"
                             height="500"
                             id="gmap_canvas"
                             src="https://maps.google.com/maps?ll=40.3834610547961%2C49.89322600000003&t=&z=14&ie=UTF8&iwloc=&output=embed"
-                            frameborder="0"
+                            frameBorder="0"
                             scrolling="no"
                             marginheight="0"
                             marginwidth="0"
