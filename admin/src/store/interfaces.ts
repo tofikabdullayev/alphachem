@@ -14,6 +14,10 @@ export interface Contacts {
   adress: Lang;
   phones: string[];
   emails: string[];
+  location: {
+    lat: string;
+    long: string;
+  };
   _id?: string;
 }
 

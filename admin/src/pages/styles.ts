@@ -12,5 +12,12 @@ export default makeStyles((theme: Theme) =>
         margin: '0 0 20px !important',
       },
     },
+    pageContent: {
+      marginTop: '17px',
+    },
+    fieldsTitle: { marginTop: '17px' },
+    fullTextFields: {
+      marginBottom: '20px',
+    },
   })
 );
