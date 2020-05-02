@@ -50,11 +50,11 @@ router.put('/', async (req, res) => {
     },
   };
   try {
-    const newContacts = await Contacts.findOneAndUpdate(
-      { collectionName: 'contacts' },
-      contacts
-    );
-    res.status(201).json(newContacts);
+    await Contacts.findOneAndUpdate({ collectionName: 'contacts' }, contacts);
+    const updatedContacts = await Contacts.findOne({
+      collectionName: 'contacts',
+    });
+    res.status(201).json(updatedContacts);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

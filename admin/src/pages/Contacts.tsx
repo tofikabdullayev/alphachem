@@ -5,8 +5,9 @@ import Loading from '../components/loading';
 import useStyles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { ContactsPageState } from './../store/reducers/contacts';
-import { getContacts } from '../store/actions/contacts';
+import { getContacts, updateContacts } from '../store/actions/contacts';
 import ContactsData from '../components/ContactsData';
+import { Contacts } from '../store/interfaces';
 
 export interface ContactsProps {}
 
@@ -20,6 +21,11 @@ const ContactsPage: React.FC<ContactsProps> = () => {
   );
   const classes = useStyles();
 
+  const updateContactsHandler = (data: Contacts) => {
+    console.log(data);
+    dispatch(updateContacts(data));
+  };
+
   useEffect(() => {
     dispatch(getContacts());
   }, [dispatch]);
@@ -32,7 +38,11 @@ const ContactsPage: React.FC<ContactsProps> = () => {
       </div>
       <div className={classes.pageContent}>
         {!isLoading ? (
-          <ContactsData classes={classes} contacts={contacts} />
+          <ContactsData
+            classes={classes}
+            contacts={contacts}
+            onSubmit={updateContactsHandler}
+          />
         ) : (
           <Loading />
         )}
