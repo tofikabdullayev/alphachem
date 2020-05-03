@@ -5,6 +5,9 @@ import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
+import AddIcon from '@material-ui/icons/Add';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { Contacts } from '../../store/interfaces';
 import { ItemTitle, initialitemTitle } from '../../pages/Products';
 
@@ -225,19 +228,43 @@ const ContactsData: React.FC<ContactsDataProps> = ({
         </Grid>
 
         {phones.map((phone: ItemTitle, i: number) => (
-          <Grid item sm={3} key={`phone-${i}`}>
+          <Grid item sm={3} key={`phone-${i}`} style={{ display: 'flex' }}>
             <TextField
               label={`Phone - ${i + 1}`}
               value={phone.value}
-              fullWidth
               onChange={(e) => phoneChangeHandler(e.target.value, i)}
               error={!phone.isValid && phone.touched}
               required
               className={classes.fullTextFields}
+              style={{ width: '100%' }}
             />
+            <IconButton
+              color="primary"
+              aria-label="Delete"
+              onClick={() => setPhones(phones.filter((v, idx) => idx !== i))}
+            >
+              <DeleteIcon />
+            </IconButton>
           </Grid>
         ))}
-
+        <Grid item sm={3}>
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() =>
+              setPhones([
+                ...phones,
+                {
+                  ...initialitemTitle,
+                  value: '',
+                  isValid: false,
+                },
+              ])
+            }
+          >
+            <AddIcon />
+          </Button>
+        </Grid>
         <Grid item sm={12}>
           <Divider />
         </Grid>
@@ -248,7 +275,7 @@ const ContactsData: React.FC<ContactsDataProps> = ({
         </Grid>
 
         {emails.map((email: ItemTitle, i: number) => (
-          <Grid item sm={3} key={`email-${i}`}>
+          <Grid item sm={3} key={`email-${i}`} style={{ display: 'flex' }}>
             <TextField
               label={`Email - ${i + 1}`}
               value={email.value}
@@ -257,10 +284,35 @@ const ContactsData: React.FC<ContactsDataProps> = ({
               error={!email.isValid && email.touched}
               required
               className={classes.fullTextFields}
+              style={{ width: '100%' }}
             />
+            <IconButton
+              color="primary"
+              aria-label="Delete"
+              onClick={() => setEmails(emails.filter((v, idx) => idx !== i))}
+            >
+              <DeleteIcon />
+            </IconButton>
           </Grid>
         ))}
-
+        <Grid item sm={3}>
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() =>
+              setEmails([
+                ...emails,
+                {
+                  ...initialitemTitle,
+                  value: '',
+                  isValid: false,
+                },
+              ])
+            }
+          >
+            <AddIcon />
+          </Button>
+        </Grid>
         <Grid item sm={12} style={{ textAlign: 'right' }}>
           <Button
             variant="contained"
