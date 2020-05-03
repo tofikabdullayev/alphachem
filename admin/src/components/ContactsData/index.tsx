@@ -147,12 +147,12 @@ const ContactsData: React.FC<ContactsDataProps> = ({
   return (
     <form onSubmit={(event: FormEvent<HTMLFormElement>) => onFormSubmit(event)}>
       <Grid container spacing={3}>
-        <Grid item sm={2}>
+        <Grid item sm={12}>
           <Typography variant="h5" component="h5">
             Adress:
           </Typography>
         </Grid>
-        <Grid item sm={10}>
+        <Grid item sm={4}>
           <TextField
             label="Adress [AZ]"
             value={adressAZ.value}
@@ -162,6 +162,8 @@ const ContactsData: React.FC<ContactsDataProps> = ({
             required
             className={classes.fullTextFields}
           />
+        </Grid>
+        <Grid item sm={4}>
           <TextField
             label="Adress [EN]"
             value={adressEN.value}
@@ -171,6 +173,8 @@ const ContactsData: React.FC<ContactsDataProps> = ({
             required
             className={classes.fullTextFields}
           />
+        </Grid>
+        <Grid item sm={4}>
           <TextField
             label="Adress [RU]"
             value={adressRU.value}
@@ -189,7 +193,7 @@ const ContactsData: React.FC<ContactsDataProps> = ({
             Location:
           </Typography>
         </Grid>
-        <Grid item sm={10}>
+        <Grid item sm={5}>
           <TextField
             label="Latitude"
             value={lat.value}
@@ -199,6 +203,8 @@ const ContactsData: React.FC<ContactsDataProps> = ({
             required
             className={classes.fullTextFields}
           />
+        </Grid>
+        <Grid item sm={5}>
           <TextField
             label="Longitude"
             value={long.value}
@@ -212,47 +218,49 @@ const ContactsData: React.FC<ContactsDataProps> = ({
         <Grid item sm={12}>
           <Divider />
         </Grid>
-        <Grid item sm={2}>
+        <Grid item sm={12}>
           <Typography variant="h5" component="h5">
             Phones:
           </Typography>
         </Grid>
-        <Grid item sm={10}>
-          {phones.map((phone: ItemTitle, i: number) => (
+
+        {phones.map((phone: ItemTitle, i: number) => (
+          <Grid item sm={3} key={`phone-${i}`}>
             <TextField
               label={`Phone - ${i + 1}`}
               value={phone.value}
-              key={`phone-${i}`}
               fullWidth
               onChange={(e) => phoneChangeHandler(e.target.value, i)}
               error={!phone.isValid && phone.touched}
               required
               className={classes.fullTextFields}
             />
-          ))}
-        </Grid>
+          </Grid>
+        ))}
+
         <Grid item sm={12}>
           <Divider />
         </Grid>
-        <Grid item sm={2}>
+        <Grid item sm={12}>
           <Typography variant="h5" component="h5">
             Emails:
           </Typography>
         </Grid>
-        <Grid item sm={10}>
-          {emails.map((email: ItemTitle, i: number) => (
+
+        {emails.map((email: ItemTitle, i: number) => (
+          <Grid item sm={3} key={`email-${i}`}>
             <TextField
               label={`Email - ${i + 1}`}
               value={email.value}
-              key={`email-${i}`}
               fullWidth
               onChange={(e) => emailChangeHandler(e.target.value, i)}
               error={!email.isValid && email.touched}
               required
               className={classes.fullTextFields}
             />
-          ))}
-        </Grid>
+          </Grid>
+        ))}
+
         <Grid item sm={12} style={{ textAlign: 'right' }}>
           <Button
             variant="contained"
