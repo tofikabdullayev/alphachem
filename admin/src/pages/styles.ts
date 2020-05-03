@@ -18,7 +18,7 @@ export default makeStyles((theme: Theme) =>
       overflow: 'hidden',
       overflowY: 'visible',
     },
-    fieldsTitle: { marginTop: '17px' },
+    fieldsTitle: { marginTop: '17px', marginBottom: '20px' },
     fullTextFields: {
       marginBottom: '20px',
     },

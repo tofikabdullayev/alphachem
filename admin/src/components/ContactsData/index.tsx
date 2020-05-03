@@ -150,168 +150,192 @@ const ContactsData: React.FC<ContactsDataProps> = ({
   return (
     <form onSubmit={(event: FormEvent<HTMLFormElement>) => onFormSubmit(event)}>
       <Grid container spacing={3}>
-        <Grid item sm={12}>
-          <Typography variant="h5" component="h5">
-            Adress:
-          </Typography>
-        </Grid>
-        <Grid item sm={4}>
-          <TextField
-            label="Adress [AZ]"
-            value={adressAZ.value}
-            fullWidth
-            onChange={(e) => titleChangehandler(e.target.value, setAdressAZ)}
-            error={!adressAZ.isValid && adressAZ.touched}
-            required
-            className={classes.fullTextFields}
-          />
-        </Grid>
-        <Grid item sm={4}>
-          <TextField
-            label="Adress [EN]"
-            value={adressEN.value}
-            fullWidth
-            onChange={(e) => titleChangehandler(e.target.value, setAdressEN)}
-            error={!adressEN.isValid && adressEN.touched}
-            required
-            className={classes.fullTextFields}
-          />
-        </Grid>
-        <Grid item sm={4}>
-          <TextField
-            label="Adress [RU]"
-            value={adressRU.value}
-            fullWidth
-            onChange={(e) => titleChangehandler(e.target.value, setAdressRU)}
-            error={!adressRU.isValid && adressRU.touched}
-            required
-            className={classes.fullTextFields}
-          />
-        </Grid>
-        <Grid item sm={12}>
-          <Divider />
-        </Grid>
-        <Grid item sm={2}>
-          <Typography variant="h5" component="h5">
-            Location:
-          </Typography>
-        </Grid>
-        <Grid item sm={5}>
-          <TextField
-            label="Latitude"
-            value={lat.value}
-            fullWidth
-            onChange={(e) => titleChangehandler(e.target.value, setLat)}
-            error={!lat.isValid && lat.touched}
-            required
-            className={classes.fullTextFields}
-          />
-        </Grid>
-        <Grid item sm={5}>
-          <TextField
-            label="Longitude"
-            value={long.value}
-            fullWidth
-            onChange={(e) => titleChangehandler(e.target.value, setLong)}
-            error={!long.isValid && long.touched}
-            required
-            className={classes.fullTextFields}
-          />
-        </Grid>
-        <Grid item sm={12}>
-          <Divider />
-        </Grid>
-        <Grid item sm={12}>
-          <Typography variant="h5" component="h5">
-            Phones:
-          </Typography>
-        </Grid>
-
-        {phones.map((phone: ItemTitle, i: number) => (
-          <Grid item sm={3} key={`phone-${i}`} style={{ display: 'flex' }}>
-            <TextField
-              label={`Phone - ${i + 1}`}
-              value={phone.value}
-              onChange={(e) => phoneChangeHandler(e.target.value, i)}
-              error={!phone.isValid && phone.touched}
-              required
-              className={classes.fullTextFields}
-              style={{ width: '100%' }}
-            />
-            <IconButton
-              color="primary"
-              aria-label="Delete"
-              onClick={() => setPhones(phones.filter((v, idx) => idx !== i))}
+        <Grid item sm={6}>
+          <Grid item sm={12}>
+            <Typography
+              variant="h5"
+              component="h5"
+              className={classes.fieldsTitle}
             >
-              <DeleteIcon />
-            </IconButton>
+              Adress:
+            </Typography>
           </Grid>
-        ))}
-        <Grid item sm={3}>
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={() =>
-              setPhones([
-                ...phones,
-                {
-                  ...initialitemTitle,
-                  value: '',
-                  isValid: false,
-                },
-              ])
-            }
-          >
-            <AddIcon />
-          </Button>
-        </Grid>
-        <Grid item sm={12}>
-          <Divider />
-        </Grid>
-        <Grid item sm={12}>
-          <Typography variant="h5" component="h5">
-            Emails:
-          </Typography>
-        </Grid>
-
-        {emails.map((email: ItemTitle, i: number) => (
-          <Grid item sm={3} key={`email-${i}`} style={{ display: 'flex' }}>
+          <Grid item sm={12}>
             <TextField
-              label={`Email - ${i + 1}`}
-              value={email.value}
+              label="Adress [AZ]"
+              value={adressAZ.value}
               fullWidth
-              onChange={(e) => emailChangeHandler(e.target.value, i)}
-              error={!email.isValid && email.touched}
+              onChange={(e) => titleChangehandler(e.target.value, setAdressAZ)}
+              error={!adressAZ.isValid && adressAZ.touched}
               required
               className={classes.fullTextFields}
-              style={{ width: '100%' }}
             />
-            <IconButton
-              color="primary"
-              aria-label="Delete"
-              onClick={() => setEmails(emails.filter((v, idx) => idx !== i))}
-            >
-              <DeleteIcon />
-            </IconButton>
           </Grid>
-        ))}
-        <Grid item sm={3}>
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={() =>
-              setEmails([
-                ...emails,
-                {
-                  ...initialitemTitle,
-                  value: '',
-                  isValid: false,
-                },
-              ])
-            }
-          >
-            <AddIcon />
-          </Button>
+          <Grid item sm={12}>
+            <TextField
+              label="Adress [EN]"
+              value={adressEN.value}
+              fullWidth
+              onChange={(e) => titleChangehandler(e.target.value, setAdressEN)}
+              error={!adressEN.isValid && adressEN.touched}
+              required
+              className={classes.fullTextFields}
+            />
+          </Grid>
+          <Grid item sm={12}>
+            <TextField
+              label="Adress [RU]"
+              value={adressRU.value}
+              fullWidth
+              onChange={(e) => titleChangehandler(e.target.value, setAdressRU)}
+              error={!adressRU.isValid && adressRU.touched}
+              required
+              className={classes.fullTextFields}
+            />
+          </Grid>
+        </Grid>
+        <Grid item sm={6}>
+          <Grid item sm={12}>
+            <Typography
+              variant="h5"
+              component="h5"
+              className={classes.fieldsTitle}
+            >
+              Location:
+            </Typography>
+          </Grid>
+          <Grid item sm={12}>
+            <TextField
+              label="Latitude"
+              value={lat.value}
+              fullWidth
+              onChange={(e) => titleChangehandler(e.target.value, setLat)}
+              error={!lat.isValid && lat.touched}
+              required
+              className={classes.fullTextFields}
+            />
+          </Grid>
+          <Grid item sm={12}>
+            <TextField
+              label="Longitude"
+              value={long.value}
+              fullWidth
+              onChange={(e) => titleChangehandler(e.target.value, setLong)}
+              error={!long.isValid && long.touched}
+              required
+              className={classes.fullTextFields}
+            />
+          </Grid>
+        </Grid>
+        <Grid item sm={12}>
+          <Divider />
+        </Grid>
+        <Grid item sm={6}>
+          <Grid item sm={12}>
+            <Typography
+              variant="h5"
+              component="h5"
+              className={classes.fieldsTitle}
+            >
+              Phones:
+            </Typography>
+          </Grid>
+
+          {phones.map((phone: ItemTitle, i: number) => (
+            <Grid item sm={12} key={`phone-${i}`} style={{ display: 'flex' }}>
+              <TextField
+                label={`Phone - ${i + 1}`}
+                value={phone.value}
+                onChange={(e) => phoneChangeHandler(e.target.value, i)}
+                error={!phone.isValid && phone.touched}
+                required
+                className={classes.fullTextFields}
+                style={{ width: '100%' }}
+              />
+              <IconButton
+                color="primary"
+                aria-label="Delete"
+                onClick={() => setPhones(phones.filter((v, idx) => idx !== i))}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </Grid>
+          ))}
+          {phones.length < 4 && (
+            <Grid item sm={12}>
+              <Button
+                variant="outlined"
+                color="primary"
+                style={{ width: '100%' }}
+                onClick={() =>
+                  setPhones([
+                    ...phones,
+                    {
+                      ...initialitemTitle,
+                      value: '',
+                      isValid: false,
+                    },
+                  ])
+                }
+              >
+                <AddIcon />
+              </Button>
+            </Grid>
+          )}
+        </Grid>
+        <Grid item sm={6}>
+          <Grid item sm={12}>
+            <Typography
+              variant="h5"
+              component="h5"
+              className={classes.fieldsTitle}
+            >
+              Emails:
+            </Typography>
+          </Grid>
+
+          {emails.map((email: ItemTitle, i: number) => (
+            <Grid item sm={12} key={`email-${i}`} style={{ display: 'flex' }}>
+              <TextField
+                label={`Email - ${i + 1}`}
+                value={email.value}
+                fullWidth
+                onChange={(e) => emailChangeHandler(e.target.value, i)}
+                error={!email.isValid && email.touched}
+                required
+                className={classes.fullTextFields}
+                style={{ width: '100%' }}
+              />
+              <IconButton
+                color="primary"
+                aria-label="Delete"
+                onClick={() => setEmails(emails.filter((v, idx) => idx !== i))}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </Grid>
+          ))}
+          {emails.length < 4 && (
+            <Grid item sm={12}>
+              <Button
+                variant="outlined"
+                color="primary"
+                style={{ width: '100%' }}
+                onClick={() =>
+                  setEmails([
+                    ...emails,
+                    {
+                      ...initialitemTitle,
+                      value: '',
+                      isValid: false,
+                    },
+                  ])
+                }
+              >
+                <AddIcon />
+              </Button>
+            </Grid>
+          )}
         </Grid>
         <Grid item sm={12} style={{ textAlign: 'right' }}>
           <Button
