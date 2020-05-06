@@ -13,7 +13,7 @@ const AboutData: React.FC<AboutDataProps> = ({ about }) => {
   }, [about]);
   return (
     <div>
-      About data containers <pre>{JSON.stringify(aboutData, null, 2)}</pre>
+      About data container <pre>{JSON.stringify(aboutData, null, 2)}</pre>
     </div>
   );
 };
