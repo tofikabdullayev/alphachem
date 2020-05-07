@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import SaveIcon from '@material-ui/icons/Save';
 import { About } from '../../store/interfaces';
+
+const useStyles = makeStyles((theme: Theme) => ({
+  textField: {
+    marginBottom: '20px',
+  },
+}));
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -40,6 +49,8 @@ export interface AboutTabProps {
 }
 
 const AboutTab: React.FC<AboutTabProps> = ({ data }) => {
+  const classes = useStyles();
+
   const [value, setValue] = useState<number>(0);
   const [azTitle, setAzTitle] = useState<string>('');
   const [azDescription, setAzDescription] = useState<string>('');
@@ -61,7 +72,10 @@ const AboutTab: React.FC<AboutTabProps> = ({ data }) => {
     setValue(newValue);
   };
   return (
-    <div>
+    <form
+      onSubmit={(e) => e.preventDefault()}
+      style={{ background: '#efefef' }}
+    >
       <AppBar position="static">
         <Tabs
           value={value}
@@ -77,6 +91,7 @@ const AboutTab: React.FC<AboutTabProps> = ({ data }) => {
       </AppBar>
       <TabPanel value={value} index={0}>
         <TextField
+          className={classes.textField}
           label="About block title [AZ]"
           value={azTitle}
           fullWidth
@@ -86,6 +101,7 @@ const AboutTab: React.FC<AboutTabProps> = ({ data }) => {
           //   className={classes.fullTextFields}
         />
         <TextField
+          className={classes.textField}
           label="About block description [AZ]"
           value={azDescription}
           fullWidth
@@ -98,6 +114,7 @@ const AboutTab: React.FC<AboutTabProps> = ({ data }) => {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <TextField
+          className={classes.textField}
           label="About block title [EN]"
           value={enTitle}
           fullWidth
@@ -107,6 +124,7 @@ const AboutTab: React.FC<AboutTabProps> = ({ data }) => {
           //   className={classes.fullTextFields}
         />
         <TextField
+          className={classes.textField}
           label="About block description [EN]"
           value={enDescription}
           fullWidth
@@ -119,6 +137,7 @@ const AboutTab: React.FC<AboutTabProps> = ({ data }) => {
       </TabPanel>
       <TabPanel value={value} index={2}>
         <TextField
+          className={classes.textField}
           label="About block title [RU]"
           value={ruTitle}
           fullWidth
@@ -128,6 +147,7 @@ const AboutTab: React.FC<AboutTabProps> = ({ data }) => {
           //   className={classes.fullTextFields}
         />
         <TextField
+          className={classes.textField}
           label="About block description [RU]"
           value={ruDescription}
           fullWidth
@@ -138,7 +158,26 @@ const AboutTab: React.FC<AboutTabProps> = ({ data }) => {
           //   className={classes.fullTextFields}
         />
       </TabPanel>
-    </div>
+      <div
+        style={{
+          display: 'flex',
+          width: '100%',
+          justifyContent: 'flex-end',
+        }}
+      >
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          startIcon={<SaveIcon />}
+          type="submit"
+          // disabled={!isFormValid()}
+          style={{ margin: '0 20px 20px' }}
+        >
+          Update about block
+        </Button>
+      </div>
+    </form>
   );
 };
 
