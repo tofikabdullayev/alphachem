@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import Grid from '@material-ui/core/Grid';
+import AboutTab from './aboutTab';
 import { About } from '../../store/interfaces';
 
 export interface AboutDataProps {
@@ -13,7 +15,13 @@ const AboutData: React.FC<AboutDataProps> = ({ about }) => {
   }, [about]);
   return (
     <div>
-      About data containers <pre>{JSON.stringify(aboutData, null, 2)}</pre>
+      <Grid container spacing={3}>
+        {aboutData.map((v) => (
+          <Grid item sm={6} key={v._id}>
+            <AboutTab data={v} />
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 };
