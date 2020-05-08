@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
+import useStyles from './styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -8,12 +9,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import { About } from '../../store/interfaces';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  textField: {
-    marginBottom: '20px',
-  },
-}));
 
 interface TabPanelProps {
   children?: React.ReactNode;
