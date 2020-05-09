@@ -38,7 +38,7 @@ const AboutPage: React.FC<AboutProps> = () => {
         </Button>
       </div>
       <div className={classes.pageContent}>
-        {!isLoading ? <AboutData about={aboutData} /> : <Loading />}
+        {isLoading ? <Loading /> : <AboutData about={aboutData} />}
       </div>
     </Layout>
   );
