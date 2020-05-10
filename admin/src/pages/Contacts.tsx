@@ -33,7 +33,7 @@ const ContactsPage: React.FC<ContactsProps> = () => {
     <Layout>
       <div className={classes.pageTitle}>
         <Typography variant="h3" component="h3">
-          Contacts page
+          Contacts
         </Typography>
       </div>
       <div className={classes.pageContent}>

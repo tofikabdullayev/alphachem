@@ -8,7 +8,7 @@ import { SliderPageState } from './../store/reducers/slider';
 import { getSlider, updateSlider } from '../store/actions/slider';
 import { Slider } from '../store/interfaces';
 import useStyles from './styles';
-import AboutTab from '../components/DataTabs/DataTabs';
+import DataTabs from '../components/DataTabs/DataTabs';
 
 export interface SliderProps {}
 
@@ -33,7 +33,7 @@ const SliderPage: React.FC<SliderProps> = () => {
     <Layout>
       <div className={classes.pageTitle}>
         <Typography variant="h3" component="h3">
-          Slider page
+          Slider
         </Typography>
       </div>
       <div className={classes.pageContent}>
@@ -42,8 +42,8 @@ const SliderPage: React.FC<SliderProps> = () => {
         ) : (
           <Grid container spacing={3}>
             {sliderData.map((v) => (
-              <Grid item sm={12} key={v._id}>
-                <AboutTab onUpdate={onUpdate} data={v} />
+              <Grid item sm={6} key={v._id}>
+                <DataTabs onUpdate={onUpdate} data={v} />
               </Grid>
             ))}
           </Grid>
