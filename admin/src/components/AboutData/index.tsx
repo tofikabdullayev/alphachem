@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
-import AboutTab from './aboutTab';
+import AboutTab from '../DataTabs/DataTabs';
 import { About } from '../../store/interfaces';
 
 export interface AboutDataProps {

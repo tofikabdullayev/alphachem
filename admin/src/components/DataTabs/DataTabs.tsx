@@ -23,8 +23,8 @@ function TabPanel(props: TabPanelProps) {
     <div
       role="tabpanel"
       hidden={value !== index}
-      id={`about-tabpanel-${index}`}
-      aria-labelledby={`about-tab-${index}`}
+      id={`data-tabpanel-${index}`}
+      aria-labelledby={`data-tab-${index}`}
       {...other}
     >
       {value === index && <Box p={3}>{children}</Box>}
@@ -34,17 +34,17 @@ function TabPanel(props: TabPanelProps) {
 
 function a11yProps(index: any) {
   return {
-    id: `about-tab-${index}`,
-    'aria-controls': `about-tabpanel-${index}`,
+    id: `data-tab-${index}`,
+    'aria-controls': `data-tabpanel-${index}`,
   };
 }
 
-export interface AboutTabProps {
+export interface DataTabsProps {
   data: About | Slider;
   onUpdate: (about: any) => void;
 }
 
-const AboutTab: React.FC<AboutTabProps> = ({ data, onUpdate }) => {
+const DataTabs: React.FC<DataTabsProps> = ({ data, onUpdate }) => {
   const classes = useStyles();
 
   const [value, setValue] = useState<number>(0);
@@ -140,7 +140,7 @@ const AboutTab: React.FC<AboutTabProps> = ({ data, onUpdate }) => {
         <Tabs
           value={value}
           onChange={handleChange}
-          aria-label="about tabs"
+          aria-label="data tabs"
           style={{ background: 'rgb(0%,52.549744%,63.137817%)' }}
           TabIndicatorProps={{ style: { background: '#fff' } }}
         >
@@ -176,7 +176,7 @@ const AboutTab: React.FC<AboutTabProps> = ({ data, onUpdate }) => {
       <TabPanel value={value} index={0}>
         <TextField
           className={classes.textField}
-          label="About block title [AZ]"
+          label="Title [AZ]"
           value={azTitle.value}
           fullWidth
           onChange={(e) => titleChangehandler(e.target.value, setAzTitle)}
@@ -185,7 +185,7 @@ const AboutTab: React.FC<AboutTabProps> = ({ data, onUpdate }) => {
         />
         <TextField
           className={classes.textField}
-          label="About block description [AZ]"
+          label="Description [AZ]"
           value={azDescription.value}
           fullWidth
           onChange={(e) => titleChangehandler(e.target.value, setAzDescription)}
@@ -197,7 +197,7 @@ const AboutTab: React.FC<AboutTabProps> = ({ data, onUpdate }) => {
       <TabPanel value={value} index={1}>
         <TextField
           className={classes.textField}
-          label="About block title [EN]"
+          label="Title [EN]"
           value={enTitle.value}
           fullWidth
           onChange={(e) => titleChangehandler(e.target.value, setEnTitle)}
@@ -206,7 +206,7 @@ const AboutTab: React.FC<AboutTabProps> = ({ data, onUpdate }) => {
         />
         <TextField
           className={classes.textField}
-          label="About block description [EN]"
+          label="Description [EN]"
           value={enDescription.value}
           fullWidth
           onChange={(e) => titleChangehandler(e.target.value, setEnDescription)}
@@ -218,7 +218,7 @@ const AboutTab: React.FC<AboutTabProps> = ({ data, onUpdate }) => {
       <TabPanel value={value} index={2}>
         <TextField
           className={classes.textField}
-          label="About block title [RU]"
+          label="Title [RU]"
           value={ruTitle.value}
           fullWidth
           onChange={(e) => titleChangehandler(e.target.value, setRuTitle)}
@@ -227,7 +227,7 @@ const AboutTab: React.FC<AboutTabProps> = ({ data, onUpdate }) => {
         />
         <TextField
           className={classes.textField}
-          label="About block description [RU]"
+          label="Description [RU]"
           value={ruDescription.value}
           fullWidth
           onChange={(e) => titleChangehandler(e.target.value, setRuDescription)}
@@ -260,11 +260,11 @@ const AboutTab: React.FC<AboutTabProps> = ({ data, onUpdate }) => {
           disabled={!isFormValid()}
           style={{ margin: '0 20px 20px' }}
         >
-          Update about block
+          Update block
         </Button>
       </div>
     </form>
   );
 };
 
-export default AboutTab;
+export default DataTabs;

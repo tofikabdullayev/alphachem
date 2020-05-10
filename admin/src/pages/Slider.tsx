@@ -8,7 +8,7 @@ import { SliderPageState } from './../store/reducers/slider';
 import { getSlider, updateSlider } from '../store/actions/slider';
 import { Slider } from '../store/interfaces';
 import useStyles from './styles';
-import AboutTab from '../components/AboutData/aboutTab';
+import AboutTab from '../components/DataTabs/DataTabs';
 
 export interface SliderProps {}
 
