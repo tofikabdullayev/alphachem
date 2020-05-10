@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
 import useStyles from './styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';

@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import Layout from '../components/Layout';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
 import Loading from '../components/loading';
 import { useDispatch, useSelector } from 'react-redux';
 import { AboutPageState } from './../store/reducers/about';
@@ -33,9 +31,6 @@ const AboutPage: React.FC<AboutProps> = () => {
         <Typography variant="h3" component="h3">
           About page
         </Typography>
-        <Button variant="outlined" color="primary">
-          <AddIcon />
-        </Button>
       </div>
       <div className={classes.pageContent}>
         {isLoading ? <Loading /> : <AboutData about={aboutData} />}

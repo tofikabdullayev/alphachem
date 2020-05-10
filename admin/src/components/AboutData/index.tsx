@@ -17,7 +17,7 @@ const AboutData: React.FC<AboutDataProps> = ({ about }) => {
     <div>
       <Grid container spacing={3}>
         {aboutData.map((v) => (
-          <Grid item sm={6} key={v._id}>
+          <Grid item sm={12} key={v._id}>
             <AboutTab data={v} />
           </Grid>
         ))}
