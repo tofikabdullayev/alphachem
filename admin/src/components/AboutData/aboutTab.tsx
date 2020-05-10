@@ -7,7 +7,7 @@ import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
-import { About } from '../../store/interfaces';
+import { About, Slider } from '../../store/interfaces';
 import { ItemTitle, initialitemTitle } from '../../pages/Products';
 
 interface TabPanelProps {

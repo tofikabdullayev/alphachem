@@ -32,9 +32,7 @@ router.put('/:id', async (req, res) => {
     imageSrc: req.body.imageSrc,
   };
   try {
-    const selectedSlider = (sliderRemove = await Slider.findById(
-      req.params.id
-    ));
+    const selectedSlider = await Slider.findById(req.params.id);
     if (selectedSlider === null) {
       return res
         .status(404)

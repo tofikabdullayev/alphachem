@@ -8,6 +8,7 @@ export interface Product extends Item {}
 
 export interface Slider extends Item {
   description: Lang;
+  _id: string;
 }
 
 export interface About {
