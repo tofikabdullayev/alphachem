@@ -30,14 +30,14 @@ router.put('/:id', async (req, res) => {
     description: req.body.description,
   };
   try {
-    const selectedAbout = (aboutRemove = await About.findById(req.params.id));
+    const selectedAbout = await About.findById(req.params.id);
     if (selectedAbout === null) {
       return res
         .status(404)
         .json({ message: 'Cannot find selected about info' });
     }
     await About.findOneAndUpdate({ _id: req.params.id }, about);
-    res.status(201).json(about);
+    res.status(201).json({ ...about, _id: req.params.id });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

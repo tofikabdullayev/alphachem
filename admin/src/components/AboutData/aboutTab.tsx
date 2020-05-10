@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, FormEvent } from 'react';
 import useStyles from './styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -41,9 +41,10 @@ function a11yProps(index: any) {
 
 export interface AboutTabProps {
   data: About;
+  onUpdate: (about: About) => void;
 }
 
-const AboutTab: React.FC<AboutTabProps> = ({ data }) => {
+const AboutTab: React.FC<AboutTabProps> = ({ data, onUpdate }) => {
   const classes = useStyles();
 
   const [value, setValue] = useState<number>(0);
@@ -109,11 +110,27 @@ const AboutTab: React.FC<AboutTabProps> = ({ data }) => {
       ruDescription.isValid
     );
   };
+
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const updatedAbout: About = {
+      title: {
+        az: azTitle.value,
+        en: enTitle.value,
+        ru: ruTitle.value,
+      },
+      description: {
+        az: azDescription.value,
+        en: enDescription.value,
+        ru: ruDescription.value,
+      },
+      _id: data._id,
+    };
+    onUpdate(updatedAbout);
+  };
+
   return (
-    <form
-      onSubmit={(e) => e.preventDefault()}
-      style={{ background: '#efefef' }}
-    >
+    <form onSubmit={onSubmit} style={{ background: '#efefef' }}>
       <AppBar position="static">
         <Tabs
           value={value}

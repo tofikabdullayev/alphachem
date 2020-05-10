@@ -13,7 +13,7 @@ export interface Slider extends Item {
 export interface About {
   title: Lang;
   description: Lang;
-  _id?: string;
+  _id: string;
 }
 
 export interface Contacts {

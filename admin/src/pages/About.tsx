@@ -4,8 +4,8 @@ import Typography from '@material-ui/core/Typography';
 import Loading from '../components/loading';
 import { useDispatch, useSelector } from 'react-redux';
 import { AboutPageState } from './../store/reducers/about';
-import { getAbout } from '../store/actions/about';
-// import { About } from '../store/interfaces';
+import { getAbout, updateAbout } from '../store/actions/about';
+import { About } from '../store/interfaces';
 import useStyles from './styles';
 import AboutData from '../components/AboutData';
 
@@ -25,6 +25,11 @@ const AboutPage: React.FC<AboutProps> = () => {
     dispatch(getAbout());
   }, [dispatch]);
 
+  const onUpdate = (about: About) => {
+    console.log(about);
+    dispatch(updateAbout(about, about._id as string));
+  };
+
   return (
     <Layout>
       <div className={classes.pageTitle}>
@@ -33,7 +38,11 @@ const AboutPage: React.FC<AboutProps> = () => {
         </Typography>
       </div>
       <div className={classes.pageContent}>
-        {isLoading ? <Loading /> : <AboutData about={aboutData} />}
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <AboutData onUpdate={onUpdate} about={aboutData} />
+        )}
       </div>
     </Layout>
   );

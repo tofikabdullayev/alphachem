@@ -4,9 +4,9 @@ import {
   GET_ABOUT,
   GET_ABOUT_COMPLETE,
   GET_ABOUT_ERROR,
-  //   UPDATE_ABOUT,
+  UPDATE_ABOUT,
   UPDATE_ABOUT_COMPLETE,
-  //   UPDATE_ABOUT_ERROR,
+  UPDATE_ABOUT_ERROR,
 } from './actionTypes';
 
 export interface ActionCreator {
@@ -31,6 +31,24 @@ export function getAbout() {
     } catch (error) {
       console.trace(error);
       dispatch(errorAction(GET_ABOUT_ERROR, error));
+    }
+  };
+}
+
+export function updateAbout(about: About, id: string) {
+  return async (dispatch: (actionCreator: ActionCreator) => void) => {
+    try {
+      dispatch({ type: UPDATE_ABOUT });
+      const response = await Axios.put(`/api/about/${id}`, about);
+
+      if (response.status < 400) {
+        dispatch(updateAboutSuccess(response.data));
+      } else {
+        dispatch(errorAction(UPDATE_ABOUT_ERROR, response.data));
+      }
+    } catch (error) {
+      console.trace(error);
+      dispatch(errorAction(UPDATE_ABOUT_ERROR, error));
     }
   };
 }
