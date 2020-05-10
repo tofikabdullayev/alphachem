@@ -83,10 +83,6 @@ const DataTabs: React.FC<DataTabsProps> = ({ data, onUpdate }) => {
     });
   }, [data]);
 
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setValue(newValue);
-  };
-
   const titleChangehandler = (
     value: string,
     setter: (newData: ItemTitle) => void
@@ -134,12 +130,21 @@ const DataTabs: React.FC<DataTabsProps> = ({ data, onUpdate }) => {
     onUpdate(updateData);
   };
 
+  const tabValidator = ([title, description]: [
+    ItemTitle,
+    ItemTitle
+  ]): string => {
+    return !(title.isValid && description.isValid) ? classes.errorTab : '';
+  };
+
   return (
     <form onSubmit={onSubmit} style={{ background: '#efefef' }}>
       <AppBar position="static">
         <Tabs
           value={value}
-          onChange={handleChange}
+          onChange={(e: React.ChangeEvent<{}>, value: number) =>
+            setValue(value)
+          }
           aria-label="data tabs"
           style={{ background: 'rgb(0%,52.549744%,63.137817%)' }}
           TabIndicatorProps={{ style: { background: '#fff' } }}
@@ -147,36 +152,24 @@ const DataTabs: React.FC<DataTabsProps> = ({ data, onUpdate }) => {
           <Tab
             label="Az"
             {...a11yProps(0)}
-            className={
-              !(azTitle.isValid && azDescription.isValid)
-                ? classes.errorTab
-                : ''
-            }
+            className={tabValidator([azTitle, azDescription])}
           />
           <Tab
             label="En"
             {...a11yProps(1)}
-            className={
-              !(enTitle.isValid && enDescription.isValid)
-                ? classes.errorTab
-                : ''
-            }
+            className={tabValidator([enTitle, enDescription])}
           />
           <Tab
             label="Ru"
             {...a11yProps(2)}
-            className={
-              !(ruTitle.isValid && ruDescription.isValid)
-                ? classes.errorTab
-                : ''
-            }
+            className={tabValidator([ruTitle, ruDescription])}
           />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
         <TextField
           className={classes.textField}
-          label="Title [AZ]"
+          label="Title"
           value={azTitle.value}
           fullWidth
           onChange={(e) => titleChangehandler(e.target.value, setAzTitle)}
@@ -185,7 +178,7 @@ const DataTabs: React.FC<DataTabsProps> = ({ data, onUpdate }) => {
         />
         <TextField
           className={classes.textField}
-          label="Description [AZ]"
+          label="Description"
           value={azDescription.value}
           fullWidth
           onChange={(e) => titleChangehandler(e.target.value, setAzDescription)}
@@ -197,7 +190,7 @@ const DataTabs: React.FC<DataTabsProps> = ({ data, onUpdate }) => {
       <TabPanel value={value} index={1}>
         <TextField
           className={classes.textField}
-          label="Title [EN]"
+          label="Title"
           value={enTitle.value}
           fullWidth
           onChange={(e) => titleChangehandler(e.target.value, setEnTitle)}
@@ -206,7 +199,7 @@ const DataTabs: React.FC<DataTabsProps> = ({ data, onUpdate }) => {
         />
         <TextField
           className={classes.textField}
-          label="Description [EN]"
+          label="Description"
           value={enDescription.value}
           fullWidth
           onChange={(e) => titleChangehandler(e.target.value, setEnDescription)}
@@ -218,7 +211,7 @@ const DataTabs: React.FC<DataTabsProps> = ({ data, onUpdate }) => {
       <TabPanel value={value} index={2}>
         <TextField
           className={classes.textField}
-          label="Title [RU]"
+          label="Title"
           value={ruTitle.value}
           fullWidth
           onChange={(e) => titleChangehandler(e.target.value, setRuTitle)}
@@ -227,7 +220,7 @@ const DataTabs: React.FC<DataTabsProps> = ({ data, onUpdate }) => {
         />
         <TextField
           className={classes.textField}
-          label="Description [RU]"
+          label="Description"
           value={ruDescription.value}
           fullWidth
           onChange={(e) => titleChangehandler(e.target.value, setRuDescription)}
@@ -236,13 +229,12 @@ const DataTabs: React.FC<DataTabsProps> = ({ data, onUpdate }) => {
           multiline
         />
       </TabPanel>
-      {(data as Slider).imageSrc ? (
+      {(data as Slider).imageSrc && (
         <img
           src={(data as Slider).imageSrc}
+          alt={data.description.az}
           style={{ maxWidth: '500px', margin: '0 0 10px 20px' }}
         />
-      ) : (
-        ''
       )}
       <div
         style={{
