@@ -16,6 +16,13 @@ interface TabPanelProps {
   value: any;
 }
 
+type FieldControl = [
+  ItemTitle,
+  (item: ItemTitle) => void,
+  ItemTitle,
+  (item: ItemTitle) => void
+];
+
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
 
@@ -61,6 +68,12 @@ const DataTabs: React.FC<DataTabsProps> = ({ data, onUpdate }) => {
   const [ruDescription, setRuDescription] = useState<ItemTitle>(
     initialitemTitle
   );
+
+  const fieldControls: FieldControl[] = [
+    [azTitle, setAzTitle, azDescription, setAzDescription],
+    [enTitle, setEnTitle, enDescription, setEnDescription],
+    [ruTitle, setRuTitle, ruDescription, setRuDescription],
+  ];
 
   useEffect(() => {
     setAzTitle({ ...initialitemTitle, value: data.title.az, isValid: true });
@@ -166,83 +179,44 @@ const DataTabs: React.FC<DataTabsProps> = ({ data, onUpdate }) => {
           />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
-        <TextField
-          className={classes.textField}
-          label="Title"
-          value={azTitle.value}
-          fullWidth
-          onChange={(e) => titleChangehandler(e.target.value, setAzTitle)}
-          error={!azTitle.isValid && azTitle.touched}
-          required
-        />
-        <TextField
-          className={classes.textField}
-          label="Description"
-          value={azDescription.value}
-          fullWidth
-          onChange={(e) => titleChangehandler(e.target.value, setAzDescription)}
-          error={!azDescription.isValid && azDescription.touched}
-          required
-          multiline
-        />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <TextField
-          className={classes.textField}
-          label="Title"
-          value={enTitle.value}
-          fullWidth
-          onChange={(e) => titleChangehandler(e.target.value, setEnTitle)}
-          error={!enTitle.isValid && enTitle.touched}
-          required
-        />
-        <TextField
-          className={classes.textField}
-          label="Description"
-          value={enDescription.value}
-          fullWidth
-          onChange={(e) => titleChangehandler(e.target.value, setEnDescription)}
-          error={!enDescription.isValid && enDescription.touched}
-          required
-          multiline
-        />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <TextField
-          className={classes.textField}
-          label="Title"
-          value={ruTitle.value}
-          fullWidth
-          onChange={(e) => titleChangehandler(e.target.value, setRuTitle)}
-          error={!ruTitle.isValid && ruTitle.touched}
-          required
-        />
-        <TextField
-          className={classes.textField}
-          label="Description"
-          value={ruDescription.value}
-          fullWidth
-          onChange={(e) => titleChangehandler(e.target.value, setRuDescription)}
-          error={!ruDescription.isValid && ruDescription.touched}
-          required
-          multiline
-        />
-      </TabPanel>
+      {fieldControls.map(
+        (
+          [title, setTitle, description, setDescription]: FieldControl,
+          idx: number
+        ) => (
+          <TabPanel value={value} index={idx}>
+            <TextField
+              className={classes.textField}
+              label="Title"
+              value={title.value}
+              fullWidth
+              onChange={(e) => titleChangehandler(e.target.value, setTitle)}
+              error={!title.isValid && title.touched}
+              required
+            />
+            <TextField
+              className={classes.textField}
+              label="Description"
+              value={description.value}
+              fullWidth
+              onChange={(e) =>
+                titleChangehandler(e.target.value, setDescription)
+              }
+              error={!description.isValid && description.touched}
+              required
+              multiline
+            />
+          </TabPanel>
+        )
+      )}
       {(data as Slider).imageSrc && (
         <img
           src={(data as Slider).imageSrc}
           alt={data.description.az}
-          style={{ maxWidth: '500px', margin: '0 0 10px 20px' }}
+          className={classes.image}
         />
       )}
-      <div
-        style={{
-          display: 'flex',
-          width: '100%',
-          justifyContent: 'flex-end',
-        }}
-      >
+      <div className={classes.btnContainer}>
         <Button
           variant="contained"
           color="primary"
@@ -252,7 +226,7 @@ const DataTabs: React.FC<DataTabsProps> = ({ data, onUpdate }) => {
           disabled={!isFormValid()}
           style={{ margin: '0 20px 20px' }}
         >
-          Update block
+          Update
         </Button>
       </div>
     </form>

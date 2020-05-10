@@ -8,5 +8,14 @@ export default makeStyles((theme: Theme) =>
     errorTab: {
       color: 'red !important',
     },
+    btnContainer: {
+      display: 'flex',
+      width: '100%',
+      justifyContent: 'flex-end',
+    },
+    image: {
+      maxWidth: '500px',
+      margin: '0 0 10px 20px',
+    },
   })
 );
