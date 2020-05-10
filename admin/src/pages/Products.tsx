@@ -54,7 +54,7 @@ const ProductsPage: React.FC<ProductsProps> = () => {
     const currentState: ItemTitle = {
       value: value,
       touched: true,
-      isValid: value.length > 0,
+      isValid: value.trim().length > 0,
     };
 
     setter(currentState);

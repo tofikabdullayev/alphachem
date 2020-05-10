@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import { About } from '../../store/interfaces';
+import { ItemTitle, initialitemTitle } from '../../pages/Products';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -46,24 +47,67 @@ const AboutTab: React.FC<AboutTabProps> = ({ data }) => {
   const classes = useStyles();
 
   const [value, setValue] = useState<number>(0);
-  const [azTitle, setAzTitle] = useState<string>('');
-  const [azDescription, setAzDescription] = useState<string>('');
-  const [enTitle, setEnTitle] = useState<string>('');
-  const [enDescription, setEnDescription] = useState<string>('');
-  const [ruTitle, setRuTitle] = useState<string>('');
-  const [ruDescription, setRuDescription] = useState<string>('');
+
+  const [azTitle, setAzTitle] = useState<ItemTitle>(initialitemTitle);
+  const [azDescription, setAzDescription] = useState<ItemTitle>(
+    initialitemTitle
+  );
+  const [enTitle, setEnTitle] = useState<ItemTitle>(initialitemTitle);
+  const [enDescription, setEnDescription] = useState<ItemTitle>(
+    initialitemTitle
+  );
+  const [ruTitle, setRuTitle] = useState<ItemTitle>(initialitemTitle);
+  const [ruDescription, setRuDescription] = useState<ItemTitle>(
+    initialitemTitle
+  );
 
   useEffect(() => {
-    setAzTitle(data.title.az);
-    setAzDescription(data.description.az);
-    setEnTitle(data.title.en);
-    setEnDescription(data.description.en);
-    setRuTitle(data.title.ru);
-    setRuDescription(data.description.ru);
+    setAzTitle({ ...initialitemTitle, value: data.title.az, isValid: true });
+    setAzDescription({
+      ...initialitemTitle,
+      value: data.description.az,
+      isValid: true,
+    });
+    setEnTitle({ ...initialitemTitle, value: data.title.en, isValid: true });
+    setEnDescription({
+      ...initialitemTitle,
+      value: data.description.en,
+      isValid: true,
+    });
+    setRuTitle({ ...initialitemTitle, value: data.title.ru, isValid: true });
+    setRuDescription({
+      ...initialitemTitle,
+      value: data.description.ru,
+      isValid: true,
+    });
   }, [data]);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
+  };
+
+  const titleChangehandler = (
+    value: string,
+    setter: (newData: ItemTitle) => void
+  ) => {
+    const currentState: ItemTitle = {
+      value: value,
+      touched: true,
+      isValid: value.trim().length > 0,
+    };
+
+    setter(currentState);
+  };
+
+  const isFormValid = () => {
+    return (
+      azTitle.isValid &&
+      azDescription.isValid &&
+      enTitle.isValid &&
+      enDescription.isValid &&
+      ruTitle.isValid &&
+      ruDescription.isValid
+    );
   };
   return (
     <form
@@ -74,82 +118,100 @@ const AboutTab: React.FC<AboutTabProps> = ({ data }) => {
         <Tabs
           value={value}
           onChange={handleChange}
-          aria-label="about tabs example"
+          aria-label="about tabs"
           style={{ background: 'rgb(0%,52.549744%,63.137817%)' }}
           TabIndicatorProps={{ style: { background: '#fff' } }}
         >
-          <Tab label="Az" {...a11yProps(0)} />
-          <Tab label="En" {...a11yProps(1)} />
-          <Tab label="Ru" {...a11yProps(2)} />
+          <Tab
+            label="Az"
+            {...a11yProps(0)}
+            className={
+              !(azTitle.isValid && azDescription.isValid)
+                ? classes.errorTab
+                : ''
+            }
+          />
+          <Tab
+            label="En"
+            {...a11yProps(1)}
+            className={
+              !(enTitle.isValid && enDescription.isValid)
+                ? classes.errorTab
+                : ''
+            }
+          />
+          <Tab
+            label="Ru"
+            {...a11yProps(2)}
+            className={
+              !(ruTitle.isValid && ruDescription.isValid)
+                ? classes.errorTab
+                : ''
+            }
+          />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
         <TextField
           className={classes.textField}
           label="About block title [AZ]"
-          value={azTitle}
+          value={azTitle.value}
           fullWidth
-          onChange={(e) => setAzTitle(e.target.value)}
-          //   error={!adressAZ.isValid && adressAZ.touched}
+          onChange={(e) => titleChangehandler(e.target.value, setAzTitle)}
+          error={!azTitle.isValid && azTitle.touched}
           required
-          //   className={classes.fullTextFields}
         />
         <TextField
           className={classes.textField}
           label="About block description [AZ]"
-          value={azDescription}
+          value={azDescription.value}
           fullWidth
-          onChange={(e) => setAzDescription(e.target.value)}
-          //   error={!adressAZ.isValid && adressAZ.touched}
+          onChange={(e) => titleChangehandler(e.target.value, setAzDescription)}
+          error={!azDescription.isValid && azDescription.touched}
           required
           multiline
-          //   className={classes.fullTextFields}
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <TextField
           className={classes.textField}
           label="About block title [EN]"
-          value={enTitle}
+          value={enTitle.value}
           fullWidth
-          onChange={(e) => setEnTitle(e.target.value)}
-          //   error={!adressAZ.isValid && adressAZ.touched}
+          onChange={(e) => titleChangehandler(e.target.value, setEnTitle)}
+          error={!enTitle.isValid && enTitle.touched}
           required
-          //   className={classes.fullTextFields}
         />
         <TextField
           className={classes.textField}
           label="About block description [EN]"
-          value={enDescription}
+          value={enDescription.value}
           fullWidth
-          onChange={(e) => setEnDescription(e.target.value)}
-          //   error={!adressAZ.isValid && adressAZ.touched}
+          onChange={(e) => titleChangehandler(e.target.value, setEnDescription)}
+          error={!enDescription.isValid && enDescription.touched}
           required
           multiline
-          //   className={classes.fullTextFields}
         />
       </TabPanel>
       <TabPanel value={value} index={2}>
         <TextField
           className={classes.textField}
           label="About block title [RU]"
-          value={ruTitle}
+          value={ruTitle.value}
           fullWidth
-          onChange={(e) => setRuTitle(e.target.value)}
-          //   error={!adressAZ.isValid && adressAZ.touched}
+          onChange={(e) => titleChangehandler(e.target.value, setRuTitle)}
+          error={!ruTitle.isValid && ruTitle.touched}
           required
-          //   className={classes.fullTextFields}
         />
         <TextField
           className={classes.textField}
           label="About block description [RU]"
-          value={ruDescription}
+          value={ruDescription.value}
           fullWidth
-          onChange={(e) => setRuDescription(e.target.value)}
-          //   error={!adressAZ.isValid && adressAZ.touched}
+          onChange={(e) => titleChangehandler(e.target.value, setRuDescription)}
+          error={!ruDescription.isValid && ruDescription.touched}
           required
           multiline
-          //   className={classes.fullTextFields}
         />
       </TabPanel>
       <div
@@ -165,7 +227,7 @@ const AboutTab: React.FC<AboutTabProps> = ({ data }) => {
           size="large"
           startIcon={<SaveIcon />}
           type="submit"
-          // disabled={!isFormValid()}
+          disabled={!isFormValid()}
           style={{ margin: '0 20px 20px' }}
         >
           Update about block

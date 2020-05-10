@@ -83,7 +83,7 @@ const ContactsData: React.FC<ContactsDataProps> = ({
     const currentState: ItemTitle = {
       value: value,
       touched: true,
-      isValid: value.length > 0,
+      isValid: value.trim().length > 0,
     };
 
     setter(currentState);
@@ -94,7 +94,7 @@ const ContactsData: React.FC<ContactsDataProps> = ({
       ...phones[i],
       value: value,
       touched: true,
-      isValid: value.length > 0,
+      isValid: value.trim().length > 0,
     };
     setPhones([...phones]);
   };
@@ -104,7 +104,7 @@ const ContactsData: React.FC<ContactsDataProps> = ({
       ...emails[i],
       value: value,
       touched: true,
-      isValid: value.length > 0,
+      isValid: value.trim().length > 0,
     };
     setEmails([...emails]);
   };

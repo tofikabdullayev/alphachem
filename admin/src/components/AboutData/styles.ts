@@ -5,5 +5,8 @@ export default makeStyles((theme: Theme) =>
     textField: {
       marginBottom: '20px',
     },
+    errorTab: {
+      color: 'red !important',
+    },
   })
 );
