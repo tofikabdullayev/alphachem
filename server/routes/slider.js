@@ -39,7 +39,7 @@ router.put('/:id', async (req, res) => {
         .json({ message: 'Cannot find selected slider info' });
     }
     await Slider.findOneAndUpdate({ _id: req.params.id }, slider);
-    res.status(201).json(slider);
+    res.status(201).json({ ...slider, _id: req.params.id });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

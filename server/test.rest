@@ -129,7 +129,7 @@ content-type: application/json
 
 ###
 
-PUT http://localhost:3000/api/slider/5ea087ced8c772289cc28db6 HTTP/1.1
+PUT http://localhost:3000/api/slider/5ea087b5d8c772289cc28db4 HTTP/1.1
 content-type: application/json
 
 {

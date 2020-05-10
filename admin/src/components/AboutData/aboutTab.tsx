@@ -40,8 +40,8 @@ function a11yProps(index: any) {
 }
 
 export interface AboutTabProps {
-  data: About;
-  onUpdate: (about: About) => void;
+  data: About | Slider;
+  onUpdate: (about: any) => void;
 }
 
 const AboutTab: React.FC<AboutTabProps> = ({ data, onUpdate }) => {
@@ -126,7 +126,12 @@ const AboutTab: React.FC<AboutTabProps> = ({ data, onUpdate }) => {
       },
       _id: data._id,
     };
-    onUpdate(updatedAbout);
+
+    const updateData = (data as Slider).imageSrc
+      ? { ...updatedAbout, imageSrc: (data as Slider).imageSrc }
+      : updatedAbout;
+
+    onUpdate(updateData);
   };
 
   return (
@@ -231,6 +236,14 @@ const AboutTab: React.FC<AboutTabProps> = ({ data, onUpdate }) => {
           multiline
         />
       </TabPanel>
+      {(data as Slider).imageSrc ? (
+        <img
+          src={(data as Slider).imageSrc}
+          style={{ maxWidth: '500px', margin: '0 0 10px 20px' }}
+        />
+      ) : (
+        ''
+      )}
       <div
         style={{
           display: 'flex',

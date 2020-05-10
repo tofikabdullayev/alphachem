@@ -26,7 +26,6 @@ const AboutPage: React.FC<AboutProps> = () => {
   }, [dispatch]);
 
   const onUpdate = (about: About) => {
-    console.log(about);
     dispatch(updateAbout(about, about._id as string));
   };
 
