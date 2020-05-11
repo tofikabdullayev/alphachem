@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import logo from '../logo.png';
 
 export interface LoginPageProps {}
 
@@ -13,9 +14,14 @@ const LoginPage: React.FC<LoginPageProps> = () => {
   return (
     <div className={classes.loginPage}>
       <Card variant="outlined">
-        <CardContent>
-          <Typography variant="h5" component="h5">
-            AlphaChem Login
+        <CardContent style={{ paddingBottom: 16 }}>
+          <img src={logo} className={classes.loginLogo} alt="logo" />
+          <Typography
+            variant="h6"
+            component="h6"
+            className={classes.loginTitle}
+          >
+            Enter your username and password
           </Typography>
           <form className={classes.loginForm}>
             <TextField
