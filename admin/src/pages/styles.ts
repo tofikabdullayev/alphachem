@@ -22,5 +22,24 @@ export default makeStyles((theme: Theme) =>
     fullTextFields: {
       marginBottom: '20px',
     },
+    loginPage: {
+      width: '100%',
+      height: '100vh',
+      background: 'rgb(0%,52.549744%,63.137817%)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    loginForm: {
+      textAlign: 'right',
+    },
+    loginInput: {
+      marginBottom: '10px',
+    },
+    loginBtn: {
+      background: 'rgb(0%,52.549744%,63.137817%)',
+      color: '#fff',
+      marginTop: '10px',
+    },
   })
 );
