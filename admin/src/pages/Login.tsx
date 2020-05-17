@@ -44,6 +44,9 @@ const LoginPage: React.FC<LoginPageProps> = () => {
             className={classes.loginForm}
             onSubmit={(e) => {
               e.preventDefault();
+              if (!(username.isValid && password.isValid)) {
+                return;
+              }
               window.location.href = '/';
             }}
           >

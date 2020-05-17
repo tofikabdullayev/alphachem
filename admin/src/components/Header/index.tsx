@@ -18,13 +18,12 @@ const Header: React.FC<HeaderProps> = () => {
         color="primary"
         style={{ color: 'white', marginLeft: '12px' }}
         aria-label="Log out"
+        onClick={() => {
+          localStorage.removeItem('token');
+          window.location.href = '/login';
+        }}
       >
-        <ExitToAppIcon
-          onClick={() => {
-            localStorage.removeItem('token');
-            window.location.href = '/login';
-          }}
-        />
+        <ExitToAppIcon />
       </IconButton>
     </Paper>
   );
