@@ -35,6 +35,9 @@ const handle = app.getRequestHandler();
   const sliderRouter = require('./routes/slider');
   server.use('/api/slider', sliderRouter);
 
+  const authRouter = require('./routes/auth');
+  server.use('/api/auth', authRouter);
+
   await nextI18next.initPromise;
   server.use(nextI18NextMiddleware(nextI18next));
 

@@ -149,3 +149,14 @@ content-type: application/json
 ###
 
 DELETE  http://localhost:3000/api/slider/5ea087c3d8c772289cc28db5 HTTP/1.1
+
+###
+
+POST http://localhost:5000/api/auth/register HTTP/1.1
+content-type: application/json
+
+{
+    "username": "tofik",
+    "password": "tofik158",
+    "name": "Tofig"
+}

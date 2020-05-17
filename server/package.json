@@ -13,7 +13,10 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
+    "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
+    "express-validator": "^6.5.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.10",
     "next": "^9.3.5",
     "next-i18next": "^4.3.0",
