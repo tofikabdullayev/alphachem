@@ -22,21 +22,18 @@ const handle = app.getRequestHandler();
   const db = mongoose.connection;
   db.on('error', (error) => console.error(error));
   db.once('open', () => console.log('Connected to Database'));
+
   server.use(express.json());
-  const contactsRouter = require('./routes/contacts');
-  server.use('/api/contact', contactsRouter);
 
-  const aboutRouter = require('./routes/about');
-  server.use('/api/about', aboutRouter);
+  server.use('/api/contact', require('./routes/contacts'));
 
-  const productsRouter = require('./routes/products');
-  server.use('/api/products', productsRouter);
+  server.use('/api/about', require('./routes/about'));
 
-  const sliderRouter = require('./routes/slider');
-  server.use('/api/slider', sliderRouter);
+  server.use('/api/products', require('./routes/products'));
 
-  const authRouter = require('./routes/auth');
-  server.use('/api/auth', authRouter);
+  server.use('/api/slider', require('./routes/slider'));
+
+  server.use('/api/auth', require('./routes/auth'));
 
   await nextI18next.initPromise;
   server.use(nextI18NextMiddleware(nextI18next));
