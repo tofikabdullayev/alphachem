@@ -7,12 +7,16 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import logo from '../logo.png';
 import { initialitemTitle, ItemTitle } from './Products';
+import Axios from 'axios';
 
-export interface LoginPageProps {}
+export interface LoginPageProps {
+  history: any;
+}
 
-const LoginPage: React.FC<LoginPageProps> = () => {
+const LoginPage: React.FC<LoginPageProps> = ({ history }: LoginPageProps) => {
   const [username, setUserName] = useState<ItemTitle>(initialitemTitle);
   const [password, setPassword] = useState<ItemTitle>(initialitemTitle);
+  const [error, setError] = useState<boolean>(false);
   const classes = useStyles();
 
   const titleChangehandler = (
@@ -22,10 +26,33 @@ const LoginPage: React.FC<LoginPageProps> = () => {
     const currentState: ItemTitle = {
       value: value,
       touched: true,
-      isValid: value.trim().length > 5,
+      isValid: value.trim().length > 4,
     };
 
     setter(currentState);
+  };
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!(username.isValid && password.isValid)) {
+      return;
+    }
+    try {
+      const response = await Axios.post('/api/auth/login', {
+        username: username.value,
+        password: password.value,
+      });
+      const data = await response.data;
+
+      setError(false);
+
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('userId', data.userId);
+      history.push('/');
+    } catch (error) {
+      setError(true);
+      console.error(error.message);
+    }
   };
 
   return (
@@ -40,16 +67,17 @@ const LoginPage: React.FC<LoginPageProps> = () => {
           >
             Enter your username and password
           </Typography>
-          <form
-            className={classes.loginForm}
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (!(username.isValid && password.isValid)) {
-                return;
-              }
-              window.location.href = '/';
-            }}
-          >
+          <form className={classes.loginForm} onSubmit={onSubmit}>
+            {error && (
+              <Typography
+                variant="body2"
+                component="p"
+                className={classes.errorMessage}
+              >
+                Invalid login or password
+              </Typography>
+            )}
+
             <TextField
               name="username"
               type="text"

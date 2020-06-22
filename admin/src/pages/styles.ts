@@ -47,5 +47,9 @@ export default makeStyles((theme: Theme) =>
       color: '#fff',
       marginTop: 10,
     },
+    errorMessage: {
+      color: 'red',
+      textAlign: 'center',
+    },
   })
 );
