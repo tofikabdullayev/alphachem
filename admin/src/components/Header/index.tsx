@@ -20,7 +20,8 @@ const Header: React.FC<HeaderProps> = () => {
         aria-label="Log out"
         onClick={() => {
           localStorage.removeItem('token');
-          window.location.href = '/login';
+          localStorage.removeItem('userId');
+          window.location.reload();
         }}
       >
         <ExitToAppIcon />

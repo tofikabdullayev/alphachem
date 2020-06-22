@@ -9,7 +9,7 @@ const ProtectedRoute: React.FC<any> = ({ component: Component, ...rest }) => {
         if (localStorage.getItem('token')) {
           return <Component {...props} />;
         } else {
-          return <Redirect to="/auth" />;
+          return <Redirect to="/login" />;
         }
       }}
     />

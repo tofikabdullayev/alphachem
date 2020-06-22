@@ -8,10 +8,9 @@ import TextField from '@material-ui/core/TextField';
 import logo from '../logo.png';
 import { initialitemTitle, ItemTitle } from './Products';
 import Axios from 'axios';
+import { RouteComponentProps } from 'react-router-dom';
 
-export interface LoginPageProps {
-  history: any;
-}
+export interface LoginPageProps extends RouteComponentProps {}
 
 const LoginPage: React.FC<LoginPageProps> = ({ history }: LoginPageProps) => {
   const [username, setUserName] = useState<ItemTitle>(initialitemTitle);
