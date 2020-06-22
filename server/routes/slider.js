@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Slider = require('../models/slider');
+const auth = require('../middleware/auth');
 
 router.get('/', async (req, res) => {
   try {
@@ -11,7 +12,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
   const slider = new Slider({
     title: req.body.title,
     description: req.body.description,
@@ -25,7 +26,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
   const slider = {
     title: req.body.title,
     description: req.body.description,
@@ -45,7 +46,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
   let sliderRemove;
   try {
     sliderRemove = await Slider.findById(req.params.id);

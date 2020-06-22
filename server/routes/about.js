@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const About = require('../models/about');
+const auth = require('../middleware/auth');
 
 router.get('/', async (req, res) => {
   try {
@@ -11,7 +12,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
   const about = new About({
     title: req.body.title,
     description: req.body.description,
@@ -24,7 +25,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
   const about = {
     title: req.body.title,
     description: req.body.description,
@@ -43,7 +44,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
   let aboutRemove;
   try {
     aboutRemove = await About.findById(req.params.id);
