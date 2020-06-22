@@ -184,7 +184,11 @@ const DataTabs: React.FC<DataTabsProps> = ({ data, onUpdate }) => {
           [title, setTitle, description, setDescription]: FieldControl,
           idx: number
         ) => (
-          <TabPanel value={value} index={idx}>
+          <TabPanel
+            value={value}
+            index={idx}
+            key={`key-is-${idx}-${Date.now()}`}
+          >
             <TextField
               className={classes.textField}
               label="Title"

@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import Axios from '../../utils/auth.interceptor';
 import { Contacts } from './../interfaces';
 import {
   GET_CONTACTS,
